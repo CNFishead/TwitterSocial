@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import setAuthToken from "./utils/setAuthToken";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import Home from "./Screens/Home/Home";
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  if (user) {
+    setAuthToken(user.token);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router className="">
+      <Container fluid>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 

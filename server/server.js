@@ -1,17 +1,18 @@
-import express from "express";
-import dotenv from "dotenv";
-import colors from "colors";
-import morgan from "morgan";
-import connectDB from "./config/db.js";
-import path from "path";
-import cors from "cors";
+const express = require("express");
+const dotenv = require("dotenv");
+const colors = require("colors");
+const morgan = require("morgan");
+const connectDB = require("./config/db.js");
+const path = require("path");
+const cors = require("cors");
 
 // import routes
+const authRoutes = require("./routes/authRoutes");
 
 // import middleware
-import mongoSanitize from "express-mongo-sanitize";
-import xss from "xss-clean";
-import hpp from "hpp";
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const hpp = require("hpp");
 
 // Load env vars
 dotenv.config();
@@ -40,10 +41,10 @@ app.use(hpp());
 app.use(cors());
 
 // API Routes
+app.use("/api/auth", authRoutes);
 
 // Set static folder
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(path.resolve(__dirname), "public")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
