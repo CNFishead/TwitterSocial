@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./Footer.css";
 // import privacyPolicy from "../assets/Privacy-Policy.docx";
 
 const Footer = () => {
@@ -10,19 +11,13 @@ const Footer = () => {
 
   let newdate = month + "/" + year;
   return (
-    <footer>
+    <footer className="footer-container">
       <Row style={{ fontFamily: "sans-serif", fontSize: ".75em" }}>
-        <Col
-          className="text-center py-3 trim-dark-bg "
-          style={{
-            backgroundColor: "var(--bs-gray-dark)",
-            color: "var(--bs-secondary)",
-          }}
-        >
-          <p className="secondary-txt" style={{}}>
+        <Col className="text-center py-3 ">
+          <p>
             Copyright &copy;{" "}
             <a
-              style={{ color: "var(--bs-primary)" }}
+              className=""
               href="https://wulfdevpage.azurewebsites.net/"
               target="_blank"
               rel="noreferrer"
@@ -33,9 +28,7 @@ const Footer = () => {
           </p>
           <p className="secondary-txt">
             If you are experiencing any issues with the app please{" "}
-            <Link to="/support" style={{ color: "var(--bs-warning)" }}>
-              Contact Us
-            </Link>
+            <Link to="/support">Contact Us</Link>
           </p>
           <p>
             View our{" "}
@@ -44,7 +37,6 @@ const Footer = () => {
               download
               target="_blank"
               rel="noreferrer"
-              style={{ color: "var(--bs-warning)" }}
             >
               Privacy Policy
             </a>

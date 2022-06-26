@@ -1,0 +1,10 @@
+.footer-container{
+  background-color: var(--bs-dark);
+  color: var(--bs-secondary)
+}
+.footer-container a{
+  color: var(--bs-warning)
+}
+.footer-container a:hover{
+  color: var(--bs-secondary)
+}

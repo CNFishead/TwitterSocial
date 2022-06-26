@@ -17,8 +17,7 @@ const hpp = require("hpp");
 // Load env vars
 dotenv.config();
 
-// Connnect to Database
-connectDB();
+
 
 const app = express();
 // Body Parser, allows to accept body data

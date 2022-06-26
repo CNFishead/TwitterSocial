@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Dark.css";
 import setAuthToken from "./utils/setAuthToken";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -8,7 +9,7 @@ import Home from "./Screens/Home/Home";
 import PrivateRoute from "./Components/PrivateRoute";
 import AuthRoutes from "./Routes/AuthRoutes";
 import NotFound from "./Screens/NotFound";
-import Footer from "./Layouts/Footer";
+import Footer from "./Layouts/Footer/Footer";
 import Alert from "./Components/Alert/Alert";
 
 function App() {

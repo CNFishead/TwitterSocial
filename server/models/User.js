@@ -8,9 +8,18 @@ const UserSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: [true, "Please add a name"],
+      trim: true,
     },
     lastName: {
       type: String,
+      trim: true,
+    },
+    username: {
+      type: String,
+      required: [true, "Please add a username"],
+      unique: true,
+      trim: true,
+      minlength: [3, "Username must be at least 3 characters"],
     },
     profileImageUrl: {
       type: String,
@@ -29,6 +38,7 @@ const UserSchema = new mongoose.Schema(
       ],
       required: [true, "Please add an email"],
       unique: true,
+      trim: true,
     },
     password: {
       type: String,

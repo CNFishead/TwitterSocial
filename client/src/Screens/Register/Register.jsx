@@ -29,10 +29,13 @@ const Register = () => {
     firstName: "",
     lastName: "",
     phoneNumber: "",
+    username: "",
     sex: "male",
   });
+  const [passConf, setPassConf] = useState("");
 
-  const { email, password, firstName, lastName, phoneNumber, sex } = userForm;
+  const { email, password, firstName, lastName, phoneNumber, sex, username } =
+    userForm;
 
   //Create an api key when user registers
 
@@ -44,7 +47,8 @@ const Register = () => {
     if (
       // eslint-disable-next-line
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) &&
-      password.length >= 10
+      password.length >= 10 &&
+      password === passConf
     ) {
       dispatch(register(userForm));
     } else {
@@ -64,7 +68,7 @@ const Register = () => {
 
   return (
     <>
-      <Container fluid style={{ padding: "40px" }} className="wrapper">
+      <Container fluid className="wrapper">
         <Meta
           title={"Tweetr | Signup"}
           desc={"Sign up for Tweetr"}
@@ -110,6 +114,20 @@ const Register = () => {
                       />
                     </Form.Group>
                   </Col>
+                  <Col>
+                    <Form.Group className="mb-3" controlId="username">
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={username}
+                        name="username"
+                        placeholder="Username"
+                        onChange={handleChange}
+                        required
+                        minLength={3}
+                      />
+                    </Form.Group>
+                  </Col>
                 </Row>
                 <Row>
                   <Col>
@@ -142,7 +160,7 @@ const Register = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>
+                  <Col lg={6}>
                     <Form.Group className="mb-3" controlId="UserPassword">
                       <Form.Label>Password</Form.Label>
                       <Form.Control
@@ -160,6 +178,23 @@ const Register = () => {
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
+                  <Col lg={6}>
+                    <Form.Group className="mb-3" controlId="UserPassword2">
+                      <Form.Label>Confirm Password</Form.Label>
+                      <Form.Control
+                        type="password"
+                        value={passConf}
+                        isValid={passConf === password}
+                        isInvalid={passConf !== password}
+                        placeholder="Confirm Password"
+                        onChange={(e) => setPassConf(e.target.value)}
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Must Match Password
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
                   <Col>
                     <Form.Group className="mb-3" controlId="phone-number">
                       <Form.Label>Phone Number</Form.Label>
@@ -167,7 +202,7 @@ const Register = () => {
                         type="tel"
                         name="phoneNumber"
                         value={phoneNumber}
-                        format="(###) ###-####"
+                        format="(###)-###-####"
                         onChange={handleChange}
                         // allowEmptyFormatting={true}
                         mask="_"
