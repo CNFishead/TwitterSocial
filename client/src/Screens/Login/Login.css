@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  margin-top: 20px;
+}
+
+.loginContainer {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  border: 1px solid var(--bs-white);
+  background-color: var(--bs-white);
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+

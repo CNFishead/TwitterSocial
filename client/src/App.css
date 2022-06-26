@@ -1,1 +1,15 @@
 @import url('./bootstrap.min.css');
+* {
+  box-sizing: border-box;
+}
+body {
+  
+}
+.main{
+  background-color: var(--bs-gray-300);
+  height: 85vh;
+  position: relative;
+}
+footer{
+  height: 100%;
+}

@@ -18,14 +18,7 @@ function App() {
   }
   return (
     <Router>
-      <Container
-        fluid
-        style={{
-          minHeight: "80vh",
-          position: "relative",
-          backgroundColor: "var(--gray)",
-        }}
-      >
+      <Container fluid className="main">
         <Alert />
         <Routes>
           <Route path="/auth/*" element={<AuthRoutes />} />

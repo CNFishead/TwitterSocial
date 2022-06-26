@@ -30,117 +30,110 @@ const Login = () => {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className="wrapper">
       <Meta title={`Tweetr | Login`} />
-      <div
-        style={{
-          backgroundColor: "var(--bs-gray-300)",
-          boxShadow: "var(--bs-gray-600) 0px 1px 0px",
-        }}
-      >
-        <FormContainer>
-          {loading ? (
-            <Loader />
-          ) : (
-            <>
-              <h1
-                style={{
-                  fontWeight: "bold",
-                  paddingBottom: "2%",
-                  color: "var(--bs-primary)",
-                }}
-              >
-                Login
-              </h1>
-              <Form onSubmit={submitHandler} className="form form-container">
-                <Form.Group controlId="email">
-                  <FloatingLabel
-                    controlId="floating-email"
-                    label="Email Address"
-                    className="mb-3"
-                  >
-                    <Form.Control
-                      type="text"
-                      value={email}
-                      placeholder="username"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                      required
-                    ></Form.Control>
-                  </FloatingLabel>
-                </Form.Group>
-                <Form.Group controlId="password">
-                  <FloatingLabel label="Password" controlId="floating-password">
-                    <Form.Control
-                      type="password"
-                      value={password}
-                      placeholder="Password"
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                    ></Form.Control>
-                  </FloatingLabel>
-                </Form.Group>
-                <div style={{ width: "100%", margin: "2% 0" }}>
-                  <Button
-                    type="submit"
-                    className="login-button"
-                    style={{ width: "50%" }}
-                  >
-                    Sign-In
-                  </Button>
-                </div>
-              </Form>
-            </>
-          )}
-
-          <Container style={{ paddingTop: "5%" }}>
-            <Link
-              style={{ textDecoration: "none" }}
-              className="gradient-text"
-              to="/resetpassword"
+      <FormContainer>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="loginContainer">
+            <h1
+              style={{
+                fontWeight: "bold",
+                paddingBottom: "2%",
+                color: "var(--bs-primary)",
+              }}
             >
-              <span>Forgot Password</span>
-            </Link>
-          </Container>
-          <Col
+              Login
+            </h1>
+            <Form onSubmit={submitHandler} className="form form-container">
+              <Form.Group controlId="email">
+                <FloatingLabel
+                  controlId="floating-email"
+                  label="Email Address"
+                  className="mb-3"
+                >
+                  <Form.Control
+                    type="text"
+                    value={email}
+                    placeholder="username"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    required
+                  ></Form.Control>
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group controlId="password">
+                <FloatingLabel label="Password" controlId="floating-password">
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  ></Form.Control>
+                </FloatingLabel>
+              </Form.Group>
+              <div style={{ width: "100%", margin: "2% 0" }}>
+                <Button
+                  type="submit"
+                  className="login-button"
+                  style={{ width: "50%" }}
+                >
+                  Sign-In
+                </Button>
+              </div>
+            </Form>
+          </div>
+        )}
+
+        <Container style={{ paddingTop: "5%" }}>
+          <Link
+            style={{ textDecoration: "none" }}
+            className="gradient-text"
+            to="/resetpassword"
+          >
+            <span>Forgot Password</span>
+          </Link>
+        </Container>
+        <Col
+          style={{
+            margin: "2%",
+            padding: "10px",
+            borderTop: "1px solid #e6e6e6",
+          }}
+        >
+          <span
             style={{
-              margin: "2%",
-              padding: "10px",
-              borderTop: "1px solid #e6e6e6",
+              fontSize: "20px",
+              fontWeight: 100,
+              paddingRight: "40px",
+              fontFamily: "sans-serif",
             }}
+          >
+            Not a user yet?
+          </span>
+          <Link
+            style={{ textDecoration: "none" }}
+            className="gradient-text"
+            to="/auth/register"
           >
             <span
               style={{
-                fontSize: "20px",
-                fontWeight: 100,
-                paddingRight: "40px",
-                fontFamily: "sans-serif",
+                fontSize: "1.5em",
+                fontWeight: "900",
+                padding: "5px 10px 5px 10px",
+                borderRadius: "5px",
+                color: "var(--bs-primary)",
               }}
             >
-              Not a user yet?
+              Register!
             </span>
-            <Link
-              style={{ textDecoration: "none" }}
-              className="gradient-text"
-              to="/auth/register"
-            >
-              <span
-                style={{
-                  fontSize: "1.5em",
-                  fontWeight: "900",
-                  padding: "5px 10px 5px 10px",
-                  borderRadius: "5px",
-                  color: "var(--bs-primary)",
-                }}
-              >
-                Register!
-              </span>
-            </Link>
-          </Col>
-        </FormContainer>
-      </div>
+          </Link>
+        </Col>
+      </FormContainer>
     </Container>
   );
 };

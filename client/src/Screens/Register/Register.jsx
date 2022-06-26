@@ -9,7 +9,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setAlert } from "../../Actions/alert";
 import Meta from "../../Components/Meta";
 import FormContainer from "../../Components/FormContainer";
@@ -64,7 +64,7 @@ const Register = () => {
 
   return (
     <>
-      <Container fluid style={{ padding: "40px" }}>
+      <Container fluid style={{ padding: "40px" }} className="wrapper">
         <Meta
           title={"Tweetr | Signup"}
           desc={"Sign up for Tweetr"}
@@ -74,14 +74,7 @@ const Register = () => {
         <FormContainer>
           <>
             <Form onSubmit={handleSubmit}>
-              <div
-                style={{
-                  backgroundColor: "#f5f5f5",
-                  boxShadow: "rgba(17, 17, 26, 0.1) 0px 1px 0px",
-                  padding: "30px",
-                  marginBottom: "30px",
-                }}
-              >
+              <div className="loginContainer">
                 <h1
                   style={{
                     fontWeight: "bold",
@@ -213,22 +206,56 @@ const Register = () => {
                     inline
                   />
                 </Form.Group>
-              </div>
-
-              <Row
-                className="justify-content-between"
-                style={{ marginTop: "35px" }}
-              >
-                <Button
-                  type="submit"
-                  className=""
-                  style={{ width: "75%", margin: "0 auto" }}
+                <Row
+                  className="justify-content-between"
+                  style={{ marginTop: "35px" }}
                 >
-                  Submit form
-                </Button>
-              </Row>
+                  <Button
+                    type="submit"
+                    className=""
+                    style={{ width: "40%", margin: "0 auto" }}
+                  >
+                    Submit form
+                  </Button>
+                </Row>
+              </div>
             </Form>
           </>
+          <Col
+            style={{
+              margin: "2%",
+              padding: "10px",
+              borderTop: "1px solid #e6e6e6",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "20px",
+                fontWeight: 100,
+                paddingRight: "40px",
+                fontFamily: "sans-serif",
+              }}
+            >
+              Already a member?
+            </span>
+            <Link
+              style={{ textDecoration: "none" }}
+              className="gradient-text"
+              to="/auth/login"
+            >
+              <span
+                style={{
+                  fontSize: "1.5em",
+                  fontWeight: "900",
+                  padding: "5px 10px 5px 10px",
+                  borderRadius: "5px",
+                  color: "var(--bs-primary)",
+                }}
+              >
+                Login!
+              </span>
+            </Link>
+          </Col>
         </FormContainer>
       </Container>
     </>
