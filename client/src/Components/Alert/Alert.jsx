@@ -1,4 +1,5 @@
 import React from "react";
+import "./Alert.css";
 import { useSelector } from "react-redux";
 
 const Alert = () => {
@@ -14,6 +15,5 @@ const Alert = () => {
     </div>
   );
 };
-
 
 export default Alert;
