@@ -1,6 +1,5 @@
 const asyncHandler = require("../../middleware/async");
 const User = require("../../models/User.js");
-const generateToken = require("../../utils/generateToken.js");
 const errorHandler = require("../../middleware/error.js");
 const userObject = require("../../utils/userObject.js");
 

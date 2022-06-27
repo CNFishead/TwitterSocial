@@ -17,7 +17,9 @@ const Home = () => {
           <Loader />
         ) : (
           <>
-            <h1>Welcome {user.fullName}</h1>
+            <div className="titleContainer">
+              <h1>Home</h1>
+            </div>
             <PostForm user={user} />
           </>
         )}

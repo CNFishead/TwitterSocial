@@ -1,6 +1,6 @@
 .alert-wrapper {
-  position: fixed;
-  top: 7rem;
+  position: absolute;
+  top: 2rem;
   right: 2rem;
   height: 50px;
   box-shadow: rgba(100, 100, 111, 0.457) 0px 7px 29px 0px;

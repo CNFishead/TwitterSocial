@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const asyncHandler = require("async");
+const asyncHandler = require("./async");
 const User = require("../models/User.js");
 
 /*
@@ -21,7 +21,7 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded._id);
+      req.user = await User.findById(decoded.id);
       if (!req.user) {
         return res
           .status(500)
@@ -58,4 +58,4 @@ const admin = (...roles) => {
   };
 };
 
-export { protect, admin };
+module.exports = { protect, admin };
