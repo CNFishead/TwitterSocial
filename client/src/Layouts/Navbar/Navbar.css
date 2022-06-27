@@ -1,0 +1,35 @@
+.nav{
+  background-color: var(--bs-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+}
+.icon{
+  color: var(--bs-white);
+  font-size: 1.25rem;
+}
+
+.nav-link{
+  padding: 10px;
+  font-size: 2em;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.icon-container:hover{
+  background-color: var(--bs-info);
+  border-radius: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav{
+    background-color: var(--bs-dark);
+  }
+}
+  

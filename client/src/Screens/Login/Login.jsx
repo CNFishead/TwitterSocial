@@ -5,7 +5,7 @@ import { Button, Col, Container, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../../Components/FormContainer";
-import Loader from "../../Components/Loader";
+import Loader from "../../Components/Loader/Loader";
 import { login } from "../../Actions/Auth/login";
 
 const Login = () => {

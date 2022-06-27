@@ -17,8 +17,6 @@ const hpp = require("hpp");
 // Load env vars
 dotenv.config();
 
-
-
 const app = express();
 // Body Parser, allows to accept body data
 app.use(express.json());
@@ -43,7 +41,7 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 
 // Set static folder
-app.use(express.static(path.join(path.resolve(__dirname), "public")));
+app.use(express.static(path.join(path.resolve(__dirname), "../public")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

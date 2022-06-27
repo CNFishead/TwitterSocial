@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -10,6 +11,7 @@
   max-width: 600px;
   border: 1px solid var(--bs-white);
   background-color: var(--bs-white);
+  
   text-align: center;
   box-shadow: 0 1px 4px rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 // import privacyPolicy from "../assets/Privacy-Policy.docx";
@@ -32,14 +32,14 @@ const Footer = () => {
           </p>
           <p>
             View our{" "}
-            <a
+            <span
               // href={privacyPolicy}
               download
               target="_blank"
               rel="noreferrer"
             >
               Privacy Policy
-            </a>
+            </span>
           </p>
         </Col>
       </Row>

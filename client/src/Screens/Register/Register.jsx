@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
-import {
-  Button,
-  Col,
-  Container,
-  FloatingLabel,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setAlert } from "../../Actions/alert";
 import Meta from "../../Components/Meta";
 import FormContainer from "../../Components/FormContainer";
-import Loader from "../../Components/Loader";
 import { register } from "../../Actions/Auth/register";
 
 const Register = () => {
@@ -22,7 +14,6 @@ const Register = () => {
   const dispatch = useDispatch();
 
   // component state
-  const [isAch, setIsAch] = useState(true);
   const [userForm, setuserForm] = useState({
     email: "",
     password: "",
@@ -122,6 +113,7 @@ const Register = () => {
                         value={username}
                         name="username"
                         placeholder="Username"
+                        autofill="off"
                         onChange={handleChange}
                         required
                         minLength={3}
