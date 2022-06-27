@@ -1,4 +1,5 @@
 const express = require("express");
+const getPosts = require("../controllers/Post/getPosts");
 const newPost = require("../controllers/Post/newPost");
 const { protect } = require("../middleware/auth");
 const router = express.Router();
@@ -9,6 +10,8 @@ const router = express.Router();
  *
  */
 
-router.post(`/`, protect, newPost);
+router.use(protect);
+
+router.route(`/`).post(newPost).get(getPosts);
 
 module.exports = router;

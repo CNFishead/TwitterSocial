@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import { alert } from "./alertReducer";
 import { authReducer } from "./authReducer";
-import { createPostReducer } from "./postReducer";
+import { createPostReducer, listPostsReducer } from "./postReducer";
 
 const postReducers = combineReducers({
   createPost: createPostReducer,
+  listPosts: listPostsReducer,
 });
 
 export const rootReducer = combineReducers({

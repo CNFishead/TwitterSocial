@@ -19,7 +19,7 @@ function App() {
   }
   return (
     <Router>
-      <Container fluid style={{ position: "relative" }}>
+      <Container fluid>
         <Alert />
         <Row>
           {user && (
@@ -47,9 +47,9 @@ function App() {
             </Col>
           )}
         </Row>
-      </Container>
 
-      <Footer />
+        <Footer />
+      </Container>
     </Router>
   );
 }

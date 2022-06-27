@@ -52,3 +52,62 @@
 #submitPostButton:disabled {
   background-color: var(--bs-secondary);
 }
+
+.post{
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  border-bottom: 1px solid rgb(230, 236, 240);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.mainContentContainer{
+  flex: 1;
+  display: flex;
+}
+.postContentContainer{
+  flex: 1;
+  padding-left: 2%;
+  display: flex;
+  flex-direction: column;
+}
+.header{
+  flex: 1;
+  justify-content: space-between;
+}
+.date{
+  text-align: right;
+}
+.username, .date{
+  font-size: .76rem;
+  color: var(--bs-gray-600)
+}
+.displayName{
+  font-weight: bold;
+}
+.postFooter{
+  flex: 1;
+  display: flex;
+ 
+  align-items: center; 
+}
+.postFooter .postButtonContainer{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.postBody{
+  background-color: var(--bs-secondary);
+  padding: 2%;
+  border-radius: 10px;
+  color: var(--bs-gray-200);
+}
+.postFooter .postButtonContainer button{
+  padding: 0 2%;
+  background-color: transparent;
+  border: none;
+  color: var(--bs-gray-600);
+}
+.postFooter .postButtonContainer button:hover{
+  color: var(--bs-primary);
+}

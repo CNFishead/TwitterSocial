@@ -3,6 +3,7 @@ import "./index.css";
 import { Button, Form, Image } from "react-bootstrap";
 import { createPost } from "../../Actions/Post/createPost";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const PostForm = ({ user }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const PostForm = ({ user }) => {
     dispatch(createPost({ text }));
     setText("");
   };
-
+  useEffect(() => {}, [dispatch]);
   return (
     <div className="postFormContainer">
       <div className="userImageContainer">
@@ -28,8 +29,10 @@ const PostForm = ({ user }) => {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="What's happening?"
+              maxLength={280}
             />
           </Form.Group>
+          <Form.Text className="text-end">{text.length}/280</Form.Text>
           <div className="buttonsContainer">
             <Button
               id="submitPostButton"
