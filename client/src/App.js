@@ -46,9 +46,8 @@ function App() {
               {/* <h1>stuff</h1> */}
             </Col>
           )}
+          <Footer />
         </Row>
-
-        <Footer />
       </Container>
     </Router>
   );
