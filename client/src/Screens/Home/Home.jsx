@@ -15,11 +15,12 @@ const Home = () => {
   const {
     listPosts: { posts, loading },
     createPost: { success: successCreate },
+    updatePost: { success: successUpdate },
   } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [user, dispatch, successCreate]);
+  }, [user, dispatch, successCreate, successUpdate]);
   return (
     <>
       <Meta title={`Tweetr | Home`} />
@@ -34,7 +35,13 @@ const Home = () => {
             <PostForm user={user} />
             <div className="postContainer">
               {posts &&
-                posts.map((post) => <PostItem key={post._id} post={post} />)}
+                posts.map((post) => (
+                  <PostItem
+                    key={post._id}
+                    post={post}
+                    liked={post.likes.includes(user._id)}
+                  />
+                ))}
             </div>
           </>
         )}

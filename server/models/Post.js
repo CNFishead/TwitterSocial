@@ -18,11 +18,8 @@ const PostSchema = new mongoose.Schema(
     },
     likes: [
       {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-          required: true,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
     avatar: {

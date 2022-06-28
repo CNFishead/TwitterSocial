@@ -1,9 +1,17 @@
 @import url('./bootstrap.min.css');
+
+:root{
+  --dark-light: #3d3d3d
+}
+
 * {
   box-sizing: border-box;
 }
 .blue {
   color: var(--bs-primary) !important;
+}
+body{
+  color:rgba(255, 255, 255, 0.15)
 }
 a{
   text-decoration: none;
@@ -134,5 +142,12 @@ footer {
   .footer-container{
     background-color: var(--bs-primary) !important;
     color: var(--bs-gray-600) !important;
+  }
+  .titleContainer{
+    border-bottom: 1px solid #adb5bd;
+  }
+  .titleContainer h1 {
+    color: var(--bs-white);
+   
   }
 }

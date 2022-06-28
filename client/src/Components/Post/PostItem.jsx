@@ -3,11 +3,18 @@ import "./index.css";
 import { MdChatBubble } from "react-icons/md";
 import { FaRetweet } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import { timeDifference } from "../../utils/timeDifference";
+import { useDispatch } from "react-redux";
+import { likePost } from "../../Actions/Post/likePost";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, liked = false }) => {
+  const dispatch = useDispatch();
+  const likeHandler = () => {
+    dispatch(likePost(post._id));
+  };
+
   return (
     <div className="post">
       {post && post.user && (
@@ -28,7 +35,7 @@ const PostItem = ({ post }) => {
                 </Col>
                 <Col>
                   <span className="date">
-                    {moment(post.createdAt).format("MM/DD/YYYY")}
+                    {timeDifference(new Date(), new Date(post.createdAt))}
                   </span>
                 </Col>
               </Row>
@@ -39,18 +46,25 @@ const PostItem = ({ post }) => {
             <Container className="postFooter">
               <Row className="postButtonContainer">
                 <Col>
-                  <button>
+                  <button id="comment">
                     <MdChatBubble />
                   </button>
                 </Col>
                 <Col>
-                  <button>
+                  <button id="retweet" className="green">
                     <FaRetweet />
                   </button>
                 </Col>
                 <Col>
-                  <button>
-                    <FaHeart />
+                  <button
+                    id="like"
+                    onClick={likeHandler}
+                    className={`red ${liked ? `active` : ""}`}
+                  >
+                    <FaHeart />{" "}
+                    <span style={{ fontSize: ".8rem" }}>
+                      {post.likes.length}
+                    </span>
                   </button>
                 </Col>
               </Row>
