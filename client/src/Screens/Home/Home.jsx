@@ -40,6 +40,7 @@ const Home = () => {
                     key={post._id}
                     post={post}
                     liked={post.likes.includes(user._id)}
+                    retweeted={post.retweetUsers.includes(user._id)}
                   />
                 ))}
             </div>

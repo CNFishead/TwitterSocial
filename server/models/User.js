@@ -51,6 +51,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    retweets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
     isActive: {
       type: Boolean,
       default: true,

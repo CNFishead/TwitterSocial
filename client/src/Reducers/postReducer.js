@@ -1,4 +1,5 @@
 import {
+  DELETE_POST,
   POST_CREATE_FAIL,
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
@@ -9,6 +10,7 @@ import {
   POST_UPDATE_REQUEST,
   POST_UPDATE_SUCCESS,
   UPDATE_POST_LIKES,
+  UPDATE_RETWEET_COUNT,
 } from "../Constants/postConstants";
 
 export const createPostReducer = (state = {}, action) => {
@@ -48,6 +50,11 @@ export const listPostsReducer = (state = { posts: [] }, action) => {
         ...state,
         loading: false,
         posts: [action.payload.post, ...state.posts],
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload.postId),
       };
     case POST_GET_SUCCESS:
       return {

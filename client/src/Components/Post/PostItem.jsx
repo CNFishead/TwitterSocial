@@ -8,13 +8,17 @@ import { Link } from "react-router-dom";
 import { timeDifference } from "../../utils/timeDifference";
 import { useDispatch } from "react-redux";
 import { likePost } from "../../Actions/Post/likePost";
+import { retweet } from "../../Actions/Post/retweetPost";
 
-const PostItem = ({ post, liked = false }) => {
+const PostItem = ({ post, liked = false, retweeted = false }) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
     dispatch(likePost(post._id));
   };
 
+  const retweetHandler = () => {
+    dispatch(retweet(post._id));
+  };
   return (
     <div className="post">
       {post && post.user && (
@@ -51,8 +55,12 @@ const PostItem = ({ post, liked = false }) => {
                   </button>
                 </Col>
                 <Col>
-                  <button id="retweet" className="green">
-                    <FaRetweet />
+                  <button
+                    id="retweet"
+                    onClick={retweetHandler}
+                    className={`green ${retweeted ? `active` : ""}`}
+                  >
+                    <FaRetweet /> {post.retweetUsers.length}
                   </button>
                 </Col>
                 <Col>

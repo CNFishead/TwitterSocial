@@ -125,3 +125,14 @@
 .postButtonContainer button.red.active:hover{
   color: var(--bs-red);
 }
+
+#retweet:hover{
+  color: var(--bs-green);
+}
+
+.postButtonContainer button.green.active{
+  color: green;
+}
+.postButtonContainer button.green.active:hover{
+  color: var(--bs-green);
+}

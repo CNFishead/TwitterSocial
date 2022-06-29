@@ -22,6 +22,23 @@ const PostSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    // will keep track of how many users have retweeted this post.
+    retweetUsers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    retweetData: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+
+    postedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
     avatar: {
       type: String,
       required: true,
