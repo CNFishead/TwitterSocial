@@ -1,5 +1,7 @@
 import {
+  CLEAR_SELECTED_POST,
   DELETE_POST,
+  GET_SELECTED_POST,
   POST_CREATE_FAIL,
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
@@ -104,6 +106,23 @@ export const updatePostReducer = (state = {}, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const postDetailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_SELECTED_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
+    case CLEAR_SELECTED_POST:
+      return {
+        ...state,
+        post: {},
       };
     default:
       return state;

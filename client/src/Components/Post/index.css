@@ -11,6 +11,12 @@
   border-bottom: 1px solid rgb(230, 236, 240);
   flex-shrink: 0;
 }
+.modal .postFormContainer{
+  border: none;
+  padding: 0;
+  padding-top: 2%;
+
+}
 
 .userImageContainer {
   width: 50px;
@@ -44,7 +50,8 @@
   align-items: center;
   padding: 2%;
 }
-#submitPostButton {
+
+.postButton {
   background-color: var(--bs-primary);
   color: white;
   border: none;
@@ -52,11 +59,11 @@
   padding: 7px 15px;
 }
 
-#submitPostButton:hover {
+.postButton:hover {
   background-color: var(--bs-light);
 }
 
-#submitPostButton:disabled {
+.postButton:disabled {
   background-color: var(--bs-secondary);
 }
 
@@ -142,4 +149,14 @@
 }
 .postButtonContainer button.green.active:hover{
   color: var(--bs-green);
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-content{
+    background-color: var(--bs-dark)
+  }
+  .modal-title {
+    color: var(--bs-gray-200);
+    font-weight: bold;
+  }
 }

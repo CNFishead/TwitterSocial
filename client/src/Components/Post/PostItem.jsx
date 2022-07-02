@@ -9,8 +9,15 @@ import { timeDifference } from "../../utils/timeDifference";
 import { useDispatch } from "react-redux";
 import { likePost } from "../../Actions/Post/likePost";
 import { retweet } from "../../Actions/Post/retweetPost";
+import { GET_SELECTED_POST } from "../../Constants/postConstants";
 
-const PostItem = ({ post, liked = false, retweeted = false }) => {
+const PostItem = ({
+  post,
+  liked = false,
+  retweeted = false,
+  setShow,
+  show,
+}) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
     dispatch(likePost(post._id));
@@ -72,7 +79,13 @@ const PostItem = ({ post, liked = false, retweeted = false }) => {
               <Container className="postFooter">
                 <Row className="postButtonContainer">
                   <Col>
-                    <button id="comment">
+                    <button
+                      id="comment"
+                      onClick={() => {
+                        dispatch({ type: GET_SELECTED_POST, payload: post });
+                        setShow(!show);
+                      }}
+                    >
                       <MdChatBubble />
                     </button>
                   </Col>
