@@ -12,6 +12,8 @@ module.exports = asyncHandler(async (req, res, next) => {
     const posts = await Post.aggregate([{ $sort: { createdAt: -1 } }]);
     // populate the user field in the posts
     await Post.populate(posts, { path: "user" });
+    await Post.populate(posts, { path: "retweetData" });
+    await Post.populate(posts, { path: "retweetData.user" });
     // return the posts
     res.status(200).json({
       message: "Posts retrieved successfully",

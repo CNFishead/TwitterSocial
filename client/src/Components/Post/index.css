@@ -1,3 +1,10 @@
+.postActionContainer{
+  padding-left: 35px;
+  font-size: 13px;
+  color: var(--bs-gray-600);
+  margin-bottom: 10px;
+}
+
 .postFormContainer {
   display: flex;
   padding: 2%;
