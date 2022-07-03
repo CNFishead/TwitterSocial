@@ -76,6 +76,21 @@ footer {
 ::-webkit-scrollbar-thumb:active {
   background: var(--bs-cyan);
 }
+.button {
+  background-color: var(--bs-secondary);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  padding: 7px 15px;
+}
+
+.button:hover {
+  background-color: var(--bs-gray-600);
+}
+
+.button:disabled {
+  background-color: var(--bs-secondary);
+}
 
 
 @media (prefers-color-scheme: dark) {

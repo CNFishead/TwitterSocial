@@ -43,9 +43,10 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    replyTo: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
     comments: [
       {
-        text: {
+        content: {
           type: String,
           required: true,
           minlength: 1,

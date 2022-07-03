@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import Home from "./Screens/Home/Home";
 import PrivateRoute from "./Components/PrivateRoute";
 import AuthRoutes from "./Routes/AuthRoutes";
+import PostRoutes from "./Routes/PostRoutes";
 import NotFound from "./Screens/NotFound";
 import Footer from "./Layouts/Footer/Footer";
 import Alert from "./Components/Alert/Alert";
@@ -29,6 +30,7 @@ function App() {
           )}
           <Col lg={!user ? 12 : 6} md={10} className="main">
             <Routes>
+              <Route path="/post/*" element={<PostRoutes />} />
               <Route path="/auth/*" element={<AuthRoutes />} />
               <Route
                 path="/"

@@ -2,6 +2,10 @@ import {
   CLEAR_SELECTED_POST,
   DELETE_POST,
   GET_SELECTED_POST,
+  GET_SELECTED_POST_REQUEST,
+  POST_ADD_COMMENT_FAIL,
+  POST_ADD_COMMENT_REQUEST,
+  POST_ADD_COMMENT_SUCCESS,
   POST_CREATE_FAIL,
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
@@ -88,11 +92,14 @@ export const listPostsReducer = (state = { posts: [] }, action) => {
 
 export const updatePostReducer = (state = {}, action) => {
   switch (action.type) {
+    case POST_ADD_COMMENT_REQUEST:
     case POST_UPDATE_REQUEST:
       return {
         ...state,
+        success: false,
         loading: true,
       };
+    case POST_ADD_COMMENT_SUCCESS:
     case POST_UPDATE_SUCCESS:
       return {
         ...state,
@@ -100,7 +107,7 @@ export const updatePostReducer = (state = {}, action) => {
         success: true,
         post: action.payload.post,
       };
-
+    case POST_ADD_COMMENT_FAIL:
     case POST_UPDATE_FAIL:
       return {
         ...state,
@@ -114,14 +121,22 @@ export const updatePostReducer = (state = {}, action) => {
 
 export const postDetailsReducer = (state = {}, action) => {
   switch (action.type) {
+    case GET_SELECTED_POST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_SELECTED_POST:
       return {
         ...state,
-        post: action.payload,
+        loading: false,
+        post: action.payload.post || action.payload,
+        replies: action.payload.replies || null,
       };
     case CLEAR_SELECTED_POST:
       return {
         ...state,
+        loading: false,
         post: {},
       };
     default:

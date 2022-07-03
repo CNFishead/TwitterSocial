@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../../Actions/Post/createPost";
 import { getPosts } from "../../Actions/Post/getPosts";
 import Loader from "../../Components/Loader/Loader";
 import Meta from "../../Components/Meta";
@@ -22,6 +23,12 @@ const Home = () => {
     selectedPost: { post },
   } = useSelector((state) => state.post);
 
+  // submit handler for creating new post
+  const submitHandlerPost = (e, text) => {
+    e.preventDefault();
+    dispatch(createPost({ text }));
+  };
+
   useEffect(() => {
     dispatch(getPosts());
   }, [user, dispatch, successCreate, successUpdate]);
@@ -32,6 +39,7 @@ const Home = () => {
         handleClose={() => setShow(false)}
         post={post}
         user={user}
+        setShow={setShow}
       />
       <Meta title={`Tweetr | Home`} />
       <Container fluid>
@@ -42,7 +50,7 @@ const Home = () => {
             <div className="titleContainer">
               <h1>Home</h1>
             </div>
-            <PostForm user={user} />
+            <PostForm user={user} submitHandler={submitHandlerPost} />
             <div className="postContainer">
               {posts &&
                 posts.map((post) => (

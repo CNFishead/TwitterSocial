@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { likePost } from "../../Actions/Post/likePost";
 import { retweet } from "../../Actions/Post/retweetPost";
 import { GET_SELECTED_POST } from "../../Constants/postConstants";
+import { BsFillChatLeftDotsFill } from "react-icons/bs";
 
 const PostItem = ({
   post,
@@ -17,6 +18,7 @@ const PostItem = ({
   retweeted = false,
   setShow,
   show,
+  showRetweet = true,
 }) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
@@ -74,7 +76,24 @@ const PostItem = ({
                 </Row>
               </Container>
               <Container className="postBody">
+                <Row style={{ textAlign: "end", fontSize: ".75em" }}>
+                  <Link to={`/post/${post._id}`}>
+                    See all replies <BsFillChatLeftDotsFill />
+                  </Link>
+                </Row>
+
                 <span>{post.content}</span>
+                {post.replyTo && showRetweet && post.replyTo.user && (
+                  <Container>
+                    <PostItem
+                      post={post.replyTo}
+                      liked={liked}
+                      retweeted={retweeted}
+                      setShow={setShow}
+                      show={show}
+                    />
+                  </Container>
+                )}
               </Container>
               <Container className="postFooter">
                 <Row className="postButtonContainer">
@@ -85,19 +104,24 @@ const PostItem = ({
                         dispatch({ type: GET_SELECTED_POST, payload: post });
                         setShow(!show);
                       }}
-                    >
-                      <MdChatBubble />
-                    </button>
-                  </Col>
-                  <Col>
-                    <button
-                      id="retweet"
-                      onClick={retweetHandler}
                       className={`green ${retweeted ? `active` : ""}`}
                     >
-                      <FaRetweet /> {post.retweetUsers.length}
+                      <MdChatBubble /> {post.comments.length}
                     </button>
                   </Col>
+
+                  {isRetweet && retweetedBy !== post.user._id && (
+                    <Col>
+                      <button
+                        id="retweet"
+                        onClick={retweetHandler}
+                        className={`green ${retweeted ? `active` : ""}`}
+                      >
+                        <FaRetweet /> {post.retweetUsers.length}
+                      </button>{" "}
+                    </Col>
+                  )}
+
                   <Col>
                     <button
                       id="like"

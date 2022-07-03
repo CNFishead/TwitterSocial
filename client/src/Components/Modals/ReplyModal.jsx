@@ -1,13 +1,29 @@
 import React from "react";
-import { Button, Form, Image, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { createComment } from "../../Actions/Post/createComment";
+import PostForm from "../Post/PostForm";
 import PostItem from "../Post/PostItem";
 
-const ReplyModal = ({ show, handleClose, post, user }) => {
-  const [text, setText] = React.useState("");
+/**
+ * @description - ReplyModal component is used to create a comment on a post
+ *
+ * @param {Object} props
+ * @param {Object} props.post - post object
+ * @param {Object} props.user - user object
+ * @param {function} props.handleClose - function to handle close event
+ * @param {boolean} props.show - boolean to show/hide modal
+ * @param {function} props.setShow - function to set show/hide modal
+ * @returns {JSX} - JSX representation of component
+ *
+ */
+const ReplyModal = ({ show, handleClose, post, user, setShow }) => {
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, reply) => {
     e.preventDefault();
-    console.log(text);
+    dispatch(createComment(post._id, reply));
+    setShow(!show);
   };
 
   return (
@@ -19,45 +35,17 @@ const ReplyModal = ({ show, handleClose, post, user }) => {
           </Modal.Header>
           <Modal.Body>
             <PostItem post={post} />
-            <div className="postFormContainer">
-              <div className="userImageContainer">
-                <Image src={user.profileImageUrl} alt="user" />
-              </div>
-              <div className="textareaContainer">
-                <Form>
-                  <Form.Group controlId="ControlTextarea1">
-                    <Form.Control
-                      as="textarea"
-                      name="text"
-                      value={text}
-                      onChange={(e) => setText(e.target.value)}
-                      placeholder="Reply Tweetr"
-                      maxLength={280}
-                    />
-                  </Form.Group>
-                  <Form.Text className="text-end">{text.length}/280</Form.Text>
-                </Form>
-              </div>
-            </div>
+            <PostForm user={user} submitHandler={handleSubmit} isReply={true}>
+              <Button
+                className="button"
+                variant="secondary"
+                onClick={handleClose}
+                style={{ display: "inline" }}
+              >
+                Close
+              </Button>
+            </PostForm>
           </Modal.Body>
-          <Modal.Footer className="buttonsContainer">
-            <Button
-              className="postButton"
-              variant="secondary"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
-            <Button
-              id="submitReplyButton"
-              variant="primary"
-              className="postButton"
-              disabled={text.trim().length === 0}
-              onClick={handleSubmit}
-            >
-              Reply
-            </Button>
-          </Modal.Footer>
         </>
       )}
     </Modal>
