@@ -1,7 +1,7 @@
 const asyncHandler = require("../../middleware/async");
 const Post = require("../../models/Post");
 const User = require("../../models/User");
-const errorHandler = require("../../middleware/error");
+const errorHandler = require("../../middleware/errorHandler");
 
 /**
  *  @param {string} postId

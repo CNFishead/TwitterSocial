@@ -2,7 +2,7 @@ import User from '../../models/User.js'
 import crypto from 'crypto'
 import sendEmail from '../../utils/sendEmail.js'
 import expressAsyncHandler from 'express-async-handler'
-import errorHandler from '../../middleware/error.js'
+import errorHandler from '../../middleware/errorHandler.js'
 
 /**
  * @description Forgot Password

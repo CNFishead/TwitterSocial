@@ -16,6 +16,7 @@ export const createComment = (postId, reply) => {
       // Success sends back a post object with the new comment
       dispatch({ type: POST_CREATE_SUCCESS, payload: data });
       dispatch(setAlert(`Comment added`, "danger"));
+      window.location.reload();
     } catch (error) {
       const message =
         error.response && error.response.data.message

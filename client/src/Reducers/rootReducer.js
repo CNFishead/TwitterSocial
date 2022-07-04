@@ -3,6 +3,7 @@ import { alert } from "./alertReducer";
 import { authReducer } from "./authReducer";
 import {
   createPostReducer,
+  deletePostReducer,
   listPostsReducer,
   postDetailsReducer,
   updatePostReducer,
@@ -13,6 +14,7 @@ const postReducers = combineReducers({
   listPosts: listPostsReducer,
   updatePost: updatePostReducer,
   selectedPost: postDetailsReducer,
+  deletePost: deletePostReducer,
 });
 
 export const rootReducer = combineReducers({

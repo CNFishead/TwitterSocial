@@ -28,7 +28,7 @@ function App() {
               <Navbar />
             </Col>
           )}
-          <Col lg={!user ? 12 : 6} md={10} className="main">
+          <Col lg={!user ? 12 : 8} md={10} className="main">
             <Routes>
               <Route path="/post/*" element={<PostRoutes />} />
               <Route path="/auth/*" element={<AuthRoutes />} />

@@ -3,7 +3,7 @@ import "./index.css";
 import { MdChatBubble } from "react-icons/md";
 import { FaRetweet } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { timeDifference } from "../../utils/timeDifference";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,9 @@ import { likePost } from "../../Actions/Post/likePost";
 import { retweet } from "../../Actions/Post/retweetPost";
 import { GET_SELECTED_POST } from "../../Constants/postConstants";
 import { BsFillChatLeftDotsFill } from "react-icons/bs";
+import { FiDelete } from "react-icons/fi";
+import { deletePost } from "../../Actions/Post/deletePost";
+import NoContent from "./NoContent";
 
 const PostItem = ({
   post,
@@ -19,6 +22,7 @@ const PostItem = ({
   setShow,
   show,
   showRetweet = true,
+  userId,
 }) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
@@ -28,7 +32,9 @@ const PostItem = ({
   const retweetHandler = () => {
     dispatch(retweet(post._id));
   };
-
+  const deleteHandler = () => {
+    dispatch(deletePost(post._id));
+  };
   const isRetweet = !post.retweetData;
   const retweetedBy = !isRetweet ? post.user.username : null;
   console.log(`post: ${post._id} isRetweet: ${!isRetweet}`);
@@ -37,6 +43,14 @@ const PostItem = ({
 
   return (
     <div className="post">
+      {post.user._id === userId && (
+        <Container className="userOptionsContainer" fluid>
+          <FiDelete
+            className="postDeleteButton"
+            onClick={() => deleteHandler(post._id)}
+          />
+        </Container>
+      )}
       {post && post.user && (
         <>
           <div className="postActionContainer">
@@ -92,6 +106,11 @@ const PostItem = ({
                       setShow={setShow}
                       show={show}
                     />
+                  </Container>
+                )}
+                {post.replyTo === null && (
+                  <Container>
+                    <NoContent />
                   </Container>
                 )}
               </Container>

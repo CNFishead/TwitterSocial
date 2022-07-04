@@ -1,7 +1,7 @@
 import User from '../../models/User.js'
 import generateToken from '../../utils/generateToken.js'
 import expressAsyncHandler from 'express-async-handler'
-import errorHandler from '../../middleware/error.js'
+import errorHandler from '../../middleware/errorHandler.js'
 
 /**
  * @description Forgot Password function

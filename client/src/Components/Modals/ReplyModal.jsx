@@ -27,7 +27,7 @@ const ReplyModal = ({ show, handleClose, post, user, setShow }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size={"lg"}>
       {post && (
         <>
           <Modal.Header closeButton>

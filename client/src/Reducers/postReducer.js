@@ -9,6 +9,9 @@ import {
   POST_CREATE_FAIL,
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
+  POST_DELETE_FAIL,
+  POST_DELETE_REQUEST,
+  POST_DELETE_SUCCESS,
   POST_GET_FAIL,
   POST_GET_REQUEST,
   POST_GET_SUCCESS,
@@ -80,6 +83,11 @@ export const listPostsReducer = (state = { posts: [] }, action) => {
               post
         ),
       };
+    case POST_DELETE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload.postId),
+      };
     case POST_GET_FAIL:
       return {
         ...state,
@@ -138,6 +146,30 @@ export const postDetailsReducer = (state = {}, action) => {
         ...state,
         loading: false,
         post: {},
+      };
+    default:
+      return state;
+  }
+};
+
+export const deletePostReducer = (state = {}, action) => {
+  switch (action.type) {
+    case POST_DELETE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case POST_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case POST_DELETE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

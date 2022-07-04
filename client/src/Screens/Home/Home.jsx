@@ -61,6 +61,7 @@ const Home = () => {
                     retweeted={post.retweetUsers.includes(user._id)}
                     setShow={setShow}
                     show={show}
+                    userId={user._id}
                   />
                 ))}
             </div>

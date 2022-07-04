@@ -1,6 +1,6 @@
 import expressAsyncHandler from 'express-async-handler'
 import User from '../../models/User.js'
-import errorHandler from '../../middleware/error.js'
+import errorHandler from '../../middleware/errorHandler.js'
 
 /*
   @Desc:   Allows a user to flip themselves Inactive
