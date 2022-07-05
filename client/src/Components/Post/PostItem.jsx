@@ -3,7 +3,7 @@ import "./index.css";
 import { MdChatBubble } from "react-icons/md";
 import { FaRetweet } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { timeDifference } from "../../utils/timeDifference";
 import { useDispatch } from "react-redux";
@@ -36,14 +36,15 @@ const PostItem = ({
     dispatch(deletePost(post._id));
   };
   const isRetweet = !post.retweetData;
-  const retweetedBy = !isRetweet ? post.user.username : null;
-  console.log(`post: ${post._id} isRetweet: ${!isRetweet}`);
+  const retweetedBy = !isRetweet ? post.postedBy.username : null;
 
   post = !isRetweet ? post.retweetData : post;
-
+  if (!post.user._id) {
+    console.log(post);
+  }
   return (
     <div className="post">
-      {post.user._id === userId && (
+      {post && post.user._id === userId && (
         <Container className="userOptionsContainer" fluid>
           <FiDelete
             className="postDeleteButton"
@@ -60,7 +61,9 @@ const PostItem = ({
                   <FaRetweet />
                 </span>{" "}
                 Retweeted by{" "}
-                <Link to={`/profile/${retweetedBy}`}>@{retweetedBy}</Link>
+                <Link to={`/dashboard/profile/${retweetedBy}`}>
+                  @{retweetedBy}
+                </Link>
               </span>
             )}
           </div>
@@ -73,7 +76,7 @@ const PostItem = ({
                 <Row>
                   <Col>
                     <Link
-                      to={`/profile/${post.user.username}`}
+                      to={`/dashboard/profile/${post.user.username}`}
                       className="displayName"
                     >
                       {post.user.fullName}

@@ -16,6 +16,7 @@ module.exports = asyncHandler(async (req, res, next) => {
     await Post.populate(posts, { path: "retweetData.user" });
     await Post.populate(posts, { path: "replyTo" });
     await Post.populate(posts, { path: "replyTo.user" });
+    await Post.populate(posts, { path: "postedBy" });
     // return the posts
     res.status(200).json({
       message: "Posts retrieved successfully",

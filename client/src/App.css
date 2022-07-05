@@ -35,8 +35,9 @@ a{
   border-right: 1px solid var(--bs-gray-600);
   overflow-y: scroll;
   display: flex;
+  height: 100vh;
+  max-height: 100vh;
   flex-direction: column;
-  height: 85vh;
   position: relative;
   
 }

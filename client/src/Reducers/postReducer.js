@@ -19,7 +19,7 @@ import {
   POST_UPDATE_REQUEST,
   POST_UPDATE_SUCCESS,
   UPDATE_POST_LIKES,
-  UPDATE_RETWEET_COUNT,
+  // UPDATE_RETWEET_COUNT,
 } from "../Constants/postConstants";
 
 export const createPostReducer = (state = {}, action) => {
@@ -58,7 +58,7 @@ export const listPostsReducer = (state = { posts: [] }, action) => {
       return {
         ...state,
         loading: false,
-        posts: [action.payload.post, ...state.posts],
+        posts: Array(state.posts.unshift(action.payload.post)),
       };
     case DELETE_POST:
       return {

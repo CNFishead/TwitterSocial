@@ -5,7 +5,7 @@ import {
   POST_UPDATE_FAIL,
   POST_UPDATE_REQUEST,
   POST_UPDATE_SUCCESS,
-  UPDATE_POST_LIKES,
+  // UPDATE_POST_LIKES,
 } from "../../Constants/postConstants";
 import { setAlert } from "../alert";
 

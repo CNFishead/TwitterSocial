@@ -18,9 +18,10 @@ exports.retweet = asyncHandler(async (req, res, next) => {
 
     // Try and delete retweet
     const deletedPost = await Post.findOneAndDelete({
-      user: userId,
+      postedBy: userId,
       retweetData: postId,
     });
+    console.log(deletedPost);
     // find the original post
     const post = await Post.findById(postId).populate("user");
     if (!deletedPost) {

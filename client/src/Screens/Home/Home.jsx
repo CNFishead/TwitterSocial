@@ -57,7 +57,7 @@ const Home = () => {
                   <PostItem
                     key={post._id}
                     post={post}
-                    liked={post.likes.includes(user._id)}
+                    liked={post.likes.includes(user._id) || false}
                     retweeted={post.retweetUsers.includes(user._id)}
                     setShow={setShow}
                     show={show}

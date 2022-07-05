@@ -13,6 +13,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Actions/Auth/logout";
 import "./Navbar.css";
+import { CLEAR_SELECTED_USER } from "../../Constants/userConstants";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,12 @@ const Navbar = () => {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={Link} to="/dashboard/profile" className="icon-container">
+        <Nav.Link
+          as={Link}
+          to="/dashboard/profile"
+          className="icon-container"
+          onClick={() => dispatch({ type: CLEAR_SELECTED_USER })}
+        >
           <BsFillPersonFill className="icon" />
         </Nav.Link>
       </Nav.Item>

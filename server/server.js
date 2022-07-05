@@ -9,6 +9,7 @@ const cors = require("cors");
 // import routes
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // import middleware
 const mongoSanitize = require("express-mongo-sanitize");
@@ -41,6 +42,7 @@ app.use(cors());
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/users", userRoutes);
 
 // Set static folder
 app.use(express.static(path.join(path.resolve(__dirname), "../public")));

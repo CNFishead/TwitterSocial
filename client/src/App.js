@@ -9,9 +9,10 @@ import PrivateRoute from "./Components/PrivateRoute";
 import AuthRoutes from "./Routes/AuthRoutes";
 import PostRoutes from "./Routes/PostRoutes";
 import NotFound from "./Screens/NotFound";
-import Footer from "./Layouts/Footer/Footer";
+// import Footer from "./Layouts/Footer/Footer";
 import Alert from "./Components/Alert/Alert";
 import Navbar from "./Layouts/Navbar/Navbar";
+import ProfileRoutes from "./Routes/ProfileRoutes";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -30,7 +31,22 @@ function App() {
           )}
           <Col lg={!user ? 12 : 8} md={10} className="main">
             <Routes>
-              <Route path="/post/*" element={<PostRoutes />} />
+              <Route
+                path="/dashboard/*"
+                element={
+                  <PrivateRoute>
+                    <ProfileRoutes />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/post/*"
+                element={
+                  <PrivateRoute>
+                    <PostRoutes />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/auth/*" element={<AuthRoutes />} />
               <Route
                 path="/"
@@ -48,7 +64,7 @@ function App() {
               {/* <h1>stuff</h1> */}
             </Col>
           )}
-          <Footer />
+          {/* <Footer /> */}
         </Row>
       </Container>
     </Router>

@@ -1,0 +1,60 @@
+.profileHeaderContainer .coverPhotoContainer{
+  height: 180px;
+  background-color: var(--bs-blue);
+  position: relative;
+}
+.profileHeaderContainer .userImageContainer{
+  height: 132px;
+  width: 132px;
+  margin-left: 2%;
+  position: absolute;
+  bottom: -66px;
+}
+
+.profileHeaderContainer .userImageContainer img{
+  border: solid 2px white;
+}
+
+.profileHeaderContainer .profileButtonsContainer{
+  text-align: right;
+  padding: 2%;
+  min-height: 66px;
+}
+.profileButton, .followButton{
+  border: 1px solid var(--bs-blue);
+  color: var(--bs-blue);
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 2%;
+}
+.profileButton:hover, .followButton:hover{
+  transition: .5s;
+  background-color: var(--bs-blue);
+  color: white;
+}
+.profileButton.active, .followButton.active{
+  background-color: var(--bs-blue);
+  color: white;
+}
+
+.profileHeaderContainer .userDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+}
+.followersContainer .value{
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-right: 5px
+}
+.followersContainer .label{
+  color: var(--bs-gray-500);
+}
+.followersContainer a{
+  margin-right: 15px;
+}
+.followersContainer a:hover{
+  border-bottom: 1px solid black;
+}

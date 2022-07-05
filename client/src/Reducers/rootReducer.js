@@ -8,6 +8,7 @@ import {
   postDetailsReducer,
   updatePostReducer,
 } from "./postReducer";
+import { selectedUserReducer } from "./userReducer";
 
 const postReducers = combineReducers({
   createPost: createPostReducer,
@@ -17,6 +18,10 @@ const postReducers = combineReducers({
   deletePost: deletePostReducer,
 });
 
+const userReducers = combineReducers({
+  selectedUser: selectedUserReducer,
+});
+
 export const rootReducer = combineReducers({
   // Alert reducer
   alert: alert,
@@ -24,4 +29,6 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   // Post Reducers
   post: postReducers,
+  // User Reducers
+  user: userReducers,
 });

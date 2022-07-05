@@ -17,10 +17,10 @@ const router = express.Router();
 
 router.use(protect);
 
-router.route(`/`).post(newPost).get(getPosts);
 router.route("/:id").get(getPost).delete(removePost);
 router.route("/:id/comment").put(addComment);
 router.route("/:id/like").put(likePost);
 router.route("/:id/retweet").post(retweet);
+router.route(`/`).post(newPost).get(getPosts);
 
 module.exports = router;
