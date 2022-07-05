@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 .blue {
-  color: var(--bs-primary) !important;
+  color: var(--bs-primary);
 }
 body{
   color:rgba(255, 255, 255, 0.15)
@@ -27,6 +27,7 @@ a{
 .titleContainer h1 {
   flex: 1;
   font-size: 1.25em;
+  color: var(--bs-dark)
 }
 
 .main {

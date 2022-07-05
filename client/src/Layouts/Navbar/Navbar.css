@@ -1,5 +1,5 @@
 .nav{
-  background-color: var(--bs-primary);
+  background-color: var(--bs-cyan);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -23,13 +23,21 @@
 }
 
 .icon-container:hover{
-  background-color: var(--bs-info);
+  background-color: rgb(51, 105, 255);
+  opacity: 0.8;
   border-radius: 50%;
 }
 
 @media (prefers-color-scheme: dark) {
   .nav{
     background-color: var(--bs-dark);
+  }
+  .icon{
+    color: var(--bs-white);
+    font-size: 1.25rem;
+  }
+  .icon-container:hover{
+    background-color: rgb(146, 193, 219);
   }
 }
   

@@ -1,9 +1,9 @@
-import "./App.css";
 import setAuthToken from "./utils/setAuthToken";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import "./App.css";
 import Home from "./Screens/Home/Home";
 import PrivateRoute from "./Components/PrivateRoute";
 import AuthRoutes from "./Routes/AuthRoutes";

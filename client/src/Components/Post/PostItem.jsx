@@ -24,6 +24,7 @@ const PostItem = ({
   showRetweet = true,
   userId,
 }) => {
+  console.log(post);
   const dispatch = useDispatch();
   const likeHandler = () => {
     dispatch(likePost(post._id));
@@ -39,9 +40,7 @@ const PostItem = ({
   const retweetedBy = !isRetweet ? post.postedBy.username : null;
 
   post = !isRetweet ? post.retweetData : post;
-  if (!post.user._id) {
-    console.log(post);
-  }
+
   return (
     <div className="post">
       {post && post.user._id === userId && (

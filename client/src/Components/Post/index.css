@@ -75,8 +75,8 @@
   flex-direction: column;
   padding: 2%;
   position: relative;
-  background-color: var(--dark-light);
-  border-bottom: 1px solid rgb(230, 236, 240);
+  background-color: #fff;
+  border-bottom: 1px solid rgb(0, 0, 0);
   flex-shrink: 0;
   cursor: pointer;
   border-radius: 10px;
@@ -153,7 +153,7 @@
   background-color: var(--bs-secondary);
   padding: 2%;
   border-radius: 10px;
-  color: var(--bs-gray-200);
+  color: var(--bs-gray-800);
 }
 .postFooter .postButtonContainer button{
   padding: 0 2%;
@@ -194,5 +194,15 @@
   .modal-title {
     color: var(--bs-gray-200);
     font-weight: bold;
+  }
+  .post{
+    background-color: var(--dark-light);
+    border-bottom: 1px solid rgb(230, 236, 240);
+  }
+  .postBody{
+    background-color: var(--bs-secondary);
+    padding: 2%;
+    border-radius: 10px;
+    color: var(--bs-gray-200);
   }
 }
