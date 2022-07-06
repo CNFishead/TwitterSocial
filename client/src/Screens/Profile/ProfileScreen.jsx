@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Button, Container, Image, Row, Tab, Tabs } from "react-bootstrap";
+import { Button, Container, Image, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getUserUsername } from "../../Actions/Post/getUserUsername";
@@ -9,6 +9,7 @@ import "./ProfileScreen.css";
 import Meta from "../../Components/Meta";
 import TweetsView from "./views/TweetsView.view";
 import Replies from "./views/Replies.View";
+import { CLEAR_POSTS } from "../../Constants/postConstants";
 
 const ProfileScreen = () => {
   // utility
@@ -18,7 +19,7 @@ const ProfileScreen = () => {
 
   // set a user to be viewed, if param username is undefined it'll be the current user
   const [profile, setProfile] = useState(undefined);
-  const [eventKey, setEventKey] = useState("tweets");
+  const [view, setView] = useState("tweets");
 
   // app state
   const { user } = useSelector((state) => state.auth);
@@ -39,7 +40,7 @@ const ProfileScreen = () => {
         setProfile(selectedUser);
       }
     }
-  }, [dispatch, profile, selectedUser, username, user]);
+  }, [dispatch, profile, selectedUser, username, user, view]);
   return (
     <>
       {profile && (
@@ -92,28 +93,26 @@ const ProfileScreen = () => {
             </div>
           </Container>
           <Container fluid className="tabsContainer">
-            <Tabs defaultActiveKey={eventKey} variant="pills">
-              <Tab
+            <Nav variant="tabs" defaultActiveKey={view}>
+              <Nav.Item
                 eventKey="tweets"
-                onClick={() => setEventKey(this.eventKey)}
-                title="Tweets"
-                className="tab"
+                onClick={() => setView("tweets")}
+                className={`tab ${view === "tweets" && "active"}`}
               >
-                <div className="tweetsContainer">
-                  <TweetsView username={profile.username} user={profile} />
-                </div>
-              </Tab>
-              <Tab
+                Tweets
+              </Nav.Item>
+              <Nav.Item
                 eventKey="replies"
-                onClick={() => setEventKey(this.eventKey)}
-                title="Replies"
-                className="tab"
+                onClick={() => setView("replies")}
+                className={`tab ${view === "replies" && "active"}`}
               >
-                <div className="tweetsContainer">
-                  <Replies />
-                </div>
-              </Tab>
-            </Tabs>
+                Replies
+              </Nav.Item>
+            </Nav>
+          </Container>
+          <Container fluid className="profileContentContainer">
+            {view === "tweets" && <TweetsView user={profile} />}
+            {view === "replies" && <Replies user={profile} />}
           </Container>
         </>
       )}

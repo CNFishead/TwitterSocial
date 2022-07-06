@@ -1,4 +1,5 @@
 import {
+  CLEAR_POSTS,
   CLEAR_SELECTED_POST,
   DELETE_POST,
   GET_SELECTED_POST,
@@ -93,6 +94,9 @@ export const listPostsReducer = (state = { posts: [] }, action) => {
         ...state,
         loading: false,
       };
+    // reset state
+    case CLEAR_POSTS:
+      return {};
     default:
       return state;
   }

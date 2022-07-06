@@ -1,4 +1,4 @@
-const asyncHandler = require("../../middleware/async");
+const asyncHandler = require("../../middleware/asyncHandler");
 const User = require("../../models/User");
 const userObject = require("../../utils/userObject");
 /**

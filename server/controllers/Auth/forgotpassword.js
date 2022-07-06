@@ -1,7 +1,7 @@
 import User from '../../models/User.js'
 import crypto from 'crypto'
 import sendEmail from '../../utils/sendEmail.js'
-import expressAsyncHandler from 'express-async-handler'
+const asyncHandler = require("../../middleware/asyncHandler");
 import errorHandler from '../../middleware/errorHandler.js'
 
 /**

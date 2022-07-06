@@ -1,4 +1,5 @@
 export const POST_LOADING = "POST_LOADING";
+export const CLEAR_POSTS = "CLEAR_POSTS";
 
 // create a new post
 export const POST_CREATE_REQUEST = "POST_CREATE_REQUEST";

@@ -1,6 +1,6 @@
 import User from '../../models/User.js'
 import generateToken from '../../utils/generateToken.js'
-import expressAsyncHandler from 'express-async-handler'
+const asyncHandler = require("../../middleware/asyncHandler");
 import errorHandler from '../../middleware/errorHandler.js'
 
 /**

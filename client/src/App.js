@@ -25,11 +25,11 @@ function App() {
         <Alert />
         <Row>
           {user && (
-            <Col lg={2} style={{ padding: "0px" }}>
+            <Col lg={2} md={2} sm={1} xs={1} style={{ padding: "0px" }}>
               <Navbar />
             </Col>
           )}
-          <Col lg={!user ? 12 : 8} md={10} className="main">
+          <Col lg={!user ? 12 : 8} md={10} xs={11} className="main">
             <Routes>
               <Route
                 path="/dashboard/*"

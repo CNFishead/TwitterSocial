@@ -7,11 +7,11 @@ import {
 } from "../../Constants/postConstants";
 import { setAlert } from "../alert";
 
-export const getPostsUsername = (username) => async (dispatch) => {
+export const getPostsReplies = (username) => async (dispatch) => {
   dispatch({ type: CLEAR_POSTS });
   dispatch({ type: POST_GET_REQUEST });
   try {
-    const { data } = await axios.get(`/api/posts/user/${username}`);
+    const { data } = await axios.get(`/api/posts/user/${username}/replies`);
     dispatch({ type: POST_GET_SUCCESS, payload: data });
   } catch (error) {
     const message =

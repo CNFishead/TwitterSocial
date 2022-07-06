@@ -1,4 +1,4 @@
-const asyncHandler = require("../../middleware/async");
+const asyncHandler = require("../../middleware/asyncHandler");
 const Post = require("../../models/Post");
 const errorHandler = require("../../middleware/errorHandler");
 

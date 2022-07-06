@@ -24,7 +24,6 @@ const PostItem = ({
   showRetweet = true,
   userId,
 }) => {
-  console.log(post);
   const dispatch = useDispatch();
   const likeHandler = () => {
     dispatch(likePost(post._id));

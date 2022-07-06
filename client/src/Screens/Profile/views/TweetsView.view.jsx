@@ -6,7 +6,6 @@ import Loader from "../../../Components/Loader/Loader";
 import PostItem from "../../../Components/Post/PostItem";
 
 const TweetsView = ({ user }) => {
-  console.log(user);
   const dispatch = useDispatch();
 
   const {

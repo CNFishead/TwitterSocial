@@ -1,4 +1,4 @@
-import expressAsyncHandler from 'express-async-handler'
+const asyncHandler = require("../../middleware/asyncHandler");
 import User from '../../models/User.js'
 import errorHandler from '../../middleware/errorHandler.js'
 

@@ -3,6 +3,7 @@ const addComment = require("../controllers/Post/addComment");
 const getPost = require("../controllers/Post/getPost");
 const getPosts = require("../controllers/Post/getPosts");
 const getUserPosts = require("../controllers/Post/getUserPosts");
+const getUserReplies = require("../controllers/Post/getUserReplies");
 const likePost = require("../controllers/Post/likePost");
 const newPost = require("../controllers/Post/newPost");
 const removePost = require("../controllers/Post/removePost");
@@ -17,6 +18,7 @@ const router = express.Router();
  */
 
 router.use(protect);
+router.route("/user/:username/replies").get(getUserReplies);
 router.route("/user/:username").get(getUserPosts);
 router.route("/:id").get(getPost).delete(removePost);
 router.route("/:id/comment").put(addComment);
