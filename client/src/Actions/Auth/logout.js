@@ -5,3 +5,4 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   document.location.href = "/auth/login";
 };
+

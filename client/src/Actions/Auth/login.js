@@ -4,7 +4,7 @@ import {
   USER_LOGIN_SUCCESS,
 } from "../../Constants/authConstants";
 import axios from "axios";
-import { setAlert } from "../alert";
+import { errorHandler } from "../../utils/errorHandler";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -22,16 +22,8 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
-    localStorage.setItem("user", JSON.stringify(data));
+    await localStorage.setItem("user", JSON.stringify(data));
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({
-      type: USER_LOGIN_FAIL,
-      payload: message,
-    });
-    dispatch(setAlert(message, "danger"));
+    errorHandler(error, dispatch, USER_LOGIN_FAIL);
   }
 };

@@ -4,6 +4,7 @@ import {
   POST_CREATE_REQUEST,
   POST_CREATE_SUCCESS,
 } from "../../Constants/postConstants";
+import { errorHandler } from "../../utils/errorHandler";
 import { setAlert } from "../alert";
 
 export const createComment = (postId, reply) => {
@@ -18,15 +19,7 @@ export const createComment = (postId, reply) => {
       dispatch(setAlert(`Comment added`, "danger"));
       window.location.reload();
     } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({
-        type: POST_CREATE_FAIL,
-        payload: message,
-      });
-      dispatch(setAlert(message, "danger"));
+      errorHandler(error, dispatch, POST_CREATE_FAIL);
     }
   };
 };

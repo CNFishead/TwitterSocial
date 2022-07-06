@@ -1,0 +1,18 @@
+.followButton{
+  border: 1px solid var(--bs-blue);
+  color: var(--bs-blue);
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-left: 2%;
+}
+.followButton:hover{
+  transition: .5s;
+  background-color: var(--bs-blue);
+  color: white;
+}
+.active{
+  background-color: var(--bs-blue);
+  color: white;
+}

@@ -4,7 +4,7 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
 } from "../../Constants/userConstants";
-import { setAlert } from "../alert";
+import { errorHandler } from "../../utils/errorHandler";
 
 /**
  *  @desc Get a user from the username
@@ -23,15 +23,7 @@ export const getUserUsername = (username) => {
         payload: res.data,
       });
     } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({
-        type: GET_USER_FAILURE,
-        payload: message,
-      });
-      dispatch(setAlert(message, "danger"));
+      errorHandler(error, dispatch, GET_USER_FAILURE);
     }
   };
 };

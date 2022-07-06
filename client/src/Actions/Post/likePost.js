@@ -5,7 +5,7 @@ import {
   POST_UPDATE_SUCCESS,
   UPDATE_POST_LIKES,
 } from "../../Constants/postConstants";
-import { setAlert } from "../alert";
+import { errorHandler } from "../../utils/errorHandler";
 
 /**
  *  @param {string} postId
@@ -28,14 +28,6 @@ export const likePost = (postId) => async (dispatch, getState) => {
       payload: { postId: data.post._id, post: data.post },
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({
-      type: POST_UPDATE_FAIL,
-      payload: message,
-    });
-    dispatch(setAlert(message, "danger"));
+    errorHandler(error, dispatch, POST_UPDATE_FAIL);
   }
 };

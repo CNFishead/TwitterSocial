@@ -13,6 +13,7 @@ import NotFound from "./Screens/NotFound";
 import Alert from "./Components/Alert/Alert";
 import Navbar from "./Layouts/Navbar/Navbar";
 import ProfileRoutes from "./Routes/ProfileRoutes";
+import { useEffect } from "react";
 
 function App() {
   const { user } = useSelector((state) => state.auth);

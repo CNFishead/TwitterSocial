@@ -7,6 +7,7 @@ import {
   POST_UPDATE_SUCCESS,
   // UPDATE_POST_LIKES,
 } from "../../Constants/postConstants";
+import { errorHandler } from "../../utils/errorHandler";
 import { setAlert } from "../alert";
 
 /**
@@ -34,14 +35,6 @@ export const retweet = (postId) => async (dispatch, getState) => {
     // scroll the window to the top
     window.scrollTo(0, 0);
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({
-      type: POST_UPDATE_FAIL,
-      payload: message,
-    });
-    dispatch(setAlert(message, "danger"));
+    errorHandler(error, dispatch, POST_UPDATE_FAIL);
   }
 };

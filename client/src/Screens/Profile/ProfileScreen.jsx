@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Button, Container, Image, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import { Container, Image, Nav, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getUserUsername } from "../../Actions/Post/getUserUsername";
@@ -9,8 +9,7 @@ import "./ProfileScreen.css";
 import Meta from "../../Components/Meta";
 import TweetsView from "./views/TweetsView.view";
 import Replies from "./views/Replies.View";
-import { CLEAR_POSTS } from "../../Constants/postConstants";
-
+import FollowButton from "../../Components/FollowButton/FollowButton.component";
 const ProfileScreen = () => {
   // utility
   const navigate = useNavigate();
@@ -40,7 +39,7 @@ const ProfileScreen = () => {
         setProfile(selectedUser);
       }
     }
-  }, [dispatch, profile, selectedUser, username, user, view]);
+  }, [dispatch, profile, selectedUser, username, user]);
   return (
     <>
       {profile && (
@@ -65,14 +64,8 @@ const ProfileScreen = () => {
                   >
                     <BsEnvelope />
                   </Link>
-                  <Link
-                    to="#"
-                    className={`${
-                      false ? "following active" : ""
-                    } followButton`}
-                  >
-                    {false ? "Following" : "Follow"}
-                  </Link>
+
+                  <FollowButton user={user} userToFollow={profile} />
                 </>
               )}
             </div>
@@ -82,11 +75,11 @@ const ProfileScreen = () => {
               <span className="description">{profile.description}</span>
               <div className="followersContainer">
                 <Link to={`/dashboard/profile/${profile.username}/following`}>
-                  <span className="value">0</span>
+                  <span className="value">{profile.following.length}</span>
                   <span className="label">Following</span>
                 </Link>
                 <Link to={`/dashboard/profile/${profile.username}/followers`}>
-                  <span className="value">0</span>
+                  <span className="value">{profile.followers.length}</span>
                   <span className="label">Followers</span>
                 </Link>
               </div>

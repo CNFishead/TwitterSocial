@@ -5,6 +5,7 @@ import {
 } from "../../Constants/postConstants";
 import { setAlert } from "../alert";
 import axios from "axios";
+import { errorHandler } from "../../utils/errorHandler";
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
@@ -18,14 +19,6 @@ export const deletePost = (postId) => async (dispatch) => {
       dispatch(setAlert("Post Deleted", "success"));
     }
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({
-      type: POST_DELETE_FAIL,
-      payload: message,
-    });
-    dispatch(setAlert(message, "danger"));
+    errorHandler(error, dispatch, POST_DELETE_FAIL);
   }
 };

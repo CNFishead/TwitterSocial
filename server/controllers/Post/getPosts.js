@@ -22,7 +22,7 @@ module.exports = asyncHandler(async (req, res, next) => {
       posts,
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     errorHandler(error, req, res);
   }
 });

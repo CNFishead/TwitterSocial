@@ -27,4 +27,3 @@ module.exports = async (id) => {
     throw new Error(error);
   }
 };
-

@@ -4,7 +4,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from "../../Constants/authConstants";
-import { setAlert } from "../alert";
+import { errorHandler } from "../../utils/errorHandler";
 
 export const register = (user) => async (dispatch) => {
   try {
@@ -19,14 +19,6 @@ export const register = (user) => async (dispatch) => {
     });
     localStorage.setItem("user", JSON.stringify(data));
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    dispatch({
-      type: USER_REGISTER_FAIL,
-      payload: message,
-    });
-    dispatch(setAlert(message, "danger"));
+    errorHandler(error, dispatch, USER_REGISTER_FAIL);
   }
 };
