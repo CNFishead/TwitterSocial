@@ -1,0 +1,26 @@
+.container{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2%;
+  margin: 0;
+  border-bottom: 1px solid var(--bs-gray-600);
+}
+.userImageContainer{
+  height: 75px;
+  width: 75px;
+  margin-left: 2%;
+}
+
+.userImageContainer img{
+  border-radius: 50%;
+  border: solid 2px white;
+}
+
+.userDetailsContainer{
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+  flex: 1;
+}

@@ -21,8 +21,10 @@ module.exports = asyncHandler(async (req, res, next) => {
       });
     }
     const posts = await Post.find({
-      user: user._id,
-      replyTo: { $exists: false },
+      $or: [
+        { user: user._id, replyTo: { $exists: false } },
+        { user: user._id, replyTo: { $exists: true, $ne: null } },
+      ],
     }).sort({ createdAt: -1 });
 
     await Post.populate(posts, { path: "user" });

@@ -88,14 +88,12 @@ const ProfileScreen = () => {
           <Container fluid className="tabsContainer">
             <Nav variant="tabs" defaultActiveKey={view}>
               <Nav.Item
-                eventKey="tweets"
                 onClick={() => setView("tweets")}
                 className={`tab ${view === "tweets" && "active"}`}
               >
                 Tweets
               </Nav.Item>
               <Nav.Item
-                eventKey="replies"
                 onClick={() => setView("replies")}
                 className={`tab ${view === "replies" && "active"}`}
               >

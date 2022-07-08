@@ -18,6 +18,8 @@ module.exports = asyncHandler(async (req, res, next) => {
         message: "User not found",
       });
     }
+    // Populate the user's followers and following
+    await User.populate(user, { path: "followers following" });
     res.status(200).json({
       success: true,
       user,
