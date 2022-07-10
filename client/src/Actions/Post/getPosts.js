@@ -6,12 +6,16 @@ import {
 } from "../../Constants/postConstants";
 import { errorHandler } from "../../utils/errorHandler";
 
-export const getPosts = () => async (dispatch) => {
-  dispatch({ type: POST_GET_REQUEST });
-  try {
-    const { data } = await axios.get("/api/posts");
-    dispatch({ type: POST_GET_SUCCESS, payload: data });
-  } catch (error) {
-    errorHandler(error, dispatch, POST_GET_FAIL);
-  }
-};
+export const getPosts =
+  (followingOnly = true) =>
+  async (dispatch) => {
+    dispatch({ type: POST_GET_REQUEST });
+    try {
+      const { data } = await axios.get(
+        `/api/posts?followingOnly=${followingOnly}`
+      );
+      dispatch({ type: POST_GET_SUCCESS, payload: data });
+    } catch (error) {
+      errorHandler(error, dispatch, POST_GET_FAIL);
+    }
+  };
