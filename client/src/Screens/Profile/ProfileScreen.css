@@ -9,6 +9,9 @@
   margin-left: 2%;
   position: absolute;
   bottom: -66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileHeaderContainer .userImageContainer img{
@@ -38,7 +41,16 @@
   background-color: var(--bs-blue);
   color: white;
 }
-
+.profilePicButton{
+  position: absolute;
+  font-size: 50px;
+  color: rgba(0,0,0,.6);
+  display: none;
+}
+.userImageContainer:hover .profilePicButton{
+  display: block;
+  cursor: pointer;
+}
 .profileHeaderContainer .userDetailsContainer{
   display: flex;
   flex-direction: column;

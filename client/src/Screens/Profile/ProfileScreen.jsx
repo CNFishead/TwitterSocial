@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import styles from "./ProfileScreen.module.css";
 import { useState } from "react";
-import { Container, Image, Nav, Spinner } from "react-bootstrap";
+import { Container, Image, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserUsername } from "../../Actions/Post/getUserUsername";
 import { BsEnvelope } from "react-icons/bs";
 import "./ProfileScreen.css";
@@ -10,21 +11,25 @@ import Meta from "../../Components/Meta";
 import TweetsView from "./views/TweetsView.view";
 import Replies from "./views/Replies.View";
 import FollowButton from "../../Components/FollowButton/FollowButton.component";
+import ChangeProfilePicModal from "../../Components/Modals/ProfilePicModal/ChangeProfilePicModal";
+import { AiFillCamera } from "react-icons/ai";
 const ProfileScreen = () => {
   // utility
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { username } = useParams();
 
   // set a user to be viewed, if param username is undefined it'll be the current user
   const [profile, setProfile] = useState(undefined);
   const [view, setView] = useState("tweets");
+  const [showModal, setShowModal] = useState(false);
 
   // app state
   const { user } = useSelector((state) => state.auth);
   const {
     selectedUser: { user: selectedUser },
   } = useSelector((state) => state.user);
+
+  const handleClose = () => setShowModal(false);
 
   // useEffect
   useEffect(() => {
@@ -44,6 +49,11 @@ const ProfileScreen = () => {
     <>
       {profile && (
         <>
+          <ChangeProfilePicModal
+            show={showModal}
+            setShow={setShowModal}
+            handleClose={handleClose}
+          />
           <Meta title={`Tweetr | ${profile.firstName}'s Profile`} />
           <Container className="profileHeaderContainer" fluid>
             <div className="coverPhotoContainer">
@@ -53,6 +63,13 @@ const ProfileScreen = () => {
                   alt="user-profile-image"
                   fluid
                 />
+                {/* check if logged in user is the one viewing profile */}
+                {user && user._id === profile._id && (
+                  <AiFillCamera
+                    onClick={() => setShowModal(!showModal)}
+                    className="profilePicButton"
+                  />
+                )}
               </div>
             </div>
             <div className="profileButtonsContainer">
