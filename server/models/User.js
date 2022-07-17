@@ -25,6 +25,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "/images/no-photo.png",
     },
+    coverPhoto: {
+      type: String,
+    },
     sex: {
       type: String,
       enum: ["male", "female"],

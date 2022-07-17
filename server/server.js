@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const connectDB = require("./config/db.js");
+const fileupload = require("express-fileupload");
 const path = require("path");
 const cors = require("cors");
 
@@ -10,6 +11,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
 
 // import middleware
 const mongoSanitize = require("express-mongo-sanitize");
@@ -22,6 +24,8 @@ dotenv.config();
 const app = express();
 // Body Parser, allows to accept body data
 app.use(express.json());
+// file uploader, allows to accept file data
+app.use(fileupload());
 
 // Dev logging middleware
 if (process.env.NODE_ENV === "development") {
@@ -43,6 +47,7 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Set static folder
 app.use(express.static(path.join(path.resolve(__dirname), "../public")));

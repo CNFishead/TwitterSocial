@@ -16,9 +16,12 @@ export const errorHandler = (error, dispatch, constant) => {
   if (message === "Not authorized, token failed") {
     dispatch(logout());
   }
-  dispatch({
-    type: constant,
-    payload: message,
-  });
+  {
+    constant &&
+      dispatch({
+        type: constant,
+        payload: message,
+      });
+  }
   dispatch(setAlert(message, "danger"));
 };

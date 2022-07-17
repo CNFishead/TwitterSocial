@@ -67,7 +67,10 @@ const PostItem = ({
           </div>
           <div className="mainContentContainer">
             <div className="userImageContainer">
-              <Image src={post.avatar} className="userImage" />
+              <Image
+                src={post.user ? post.user.profileImageUrl : post.avatar}
+                className="userImage"
+              />
             </div>
             <Container fluid className="postContentContainer">
               <Container fluid className="header">

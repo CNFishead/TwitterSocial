@@ -13,6 +13,7 @@ import Replies from "./views/Replies.View";
 import FollowButton from "../../Components/FollowButton/FollowButton.component";
 import ChangeProfilePicModal from "../../Components/Modals/ProfilePicModal/ChangeProfilePicModal";
 import { AiFillCamera } from "react-icons/ai";
+import ChangeCoverPhotoModal from "../../Components/Modals/CoverPhotoModal/ChangeCoverPhotoModal";
 const ProfileScreen = () => {
   // utility
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const ProfileScreen = () => {
   const [profile, setProfile] = useState(undefined);
   const [view, setView] = useState("tweets");
   const [showModal, setShowModal] = useState(false);
+  const [showCoverPhotoModal, setShowCoverPhotoModal] = useState(false);
 
   // app state
   const { user } = useSelector((state) => state.auth);
@@ -54,9 +56,27 @@ const ProfileScreen = () => {
             setShow={setShowModal}
             handleClose={handleClose}
           />
+          <ChangeCoverPhotoModal
+            show={showCoverPhotoModal}
+            setShow={setShowCoverPhotoModal}
+          />
           <Meta title={`Tweetr | ${profile.firstName}'s Profile`} />
           <Container className="profileHeaderContainer" fluid>
-            <div className="coverPhotoContainer">
+            <div className="coverPhotoSection">
+              <div className="coverPhotoContainer">
+                <Image
+                  src={profile.coverPhoto}
+                  alt="user-profile-image"
+                  fluid
+                />
+                {/* check if logged in user is the one viewing profile */}
+                {user && user._id === profile._id && (
+                  <AiFillCamera
+                    onClick={() => setShowCoverPhotoModal(!showCoverPhotoModal)}
+                    className="coverPhotoButton"
+                  />
+                )}
+              </div>
               <div className="userImageContainer">
                 <Image
                   src={profile.profileImageUrl}

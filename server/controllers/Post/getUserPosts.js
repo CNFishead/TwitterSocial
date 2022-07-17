@@ -24,6 +24,8 @@ module.exports = asyncHandler(async (req, res, next) => {
       $or: [
         { user: user._id, replyTo: { $exists: false } },
         { user: user._id, replyTo: { $exists: true, $ne: null } },
+        // find the posts the user has retweeted
+        { retweetUsers: { $in: [user._id] } },
       ],
     }).sort({ createdAt: -1 });
 

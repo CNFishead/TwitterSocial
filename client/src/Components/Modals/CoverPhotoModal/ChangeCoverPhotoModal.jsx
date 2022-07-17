@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Image, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import "./ChangeProfilePicModal.css";
+import "./ChangeCoverPhotoModal.css";
 import Cropper from "cropperjs";
 import Loader from "../../Loader/Loader";
 import { setAlert } from "../../../Actions/alert";
 import axios from "axios";
 import { errorHandler } from "../../../utils/errorHandler";
-import { USER_LOGIN_SUCCESS } from "../../../Constants/authConstants";
 
 /**
  * @description - Modal to change the users profile picture
  *
- * @param {function} props.handleClose - function to handle close event
  * @param {boolean} props.show - boolean to show/hide modal
  * @returns {JSX} - JSX representation of component
  *
  */
-const ChangeProfilePicModal = ({ show, setShow }) => {
+const ChangeCoverPhotoModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
   const [cropper, setCropper] = useState(false);
   const [cropperJS, setCropperJS] = useState(false);
@@ -60,11 +58,11 @@ const ChangeProfilePicModal = ({ show, setShow }) => {
           // send the form data to the server
           setUploading(true);
           const { data } = await axios.post(
-            "/api/upload/profilePic",
+            "/api/upload/coverPhoto",
             formData,
             config
           );
-          // set the localStorage user to the new user passed back from the server. and re login the user
+          // set the localstorage user to the updated profile information
           localStorage.setItem("user", JSON.stringify(data.user));
           // reload the page
           window.location.reload();
@@ -94,7 +92,7 @@ const ChangeProfilePicModal = ({ show, setShow }) => {
         // get the image and set it to the cropper
         setCropper(
           new Cropper(document.getElementById("preview"), {
-            aspectRatio: 1 / 1,
+            aspectRatio: 16 / 9,
             background: false,
           })
         );
@@ -155,7 +153,7 @@ const ChangeProfilePicModal = ({ show, setShow }) => {
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Profile Pic</Modal.Title>
+        <Modal.Title>Cover Photo</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {uploading ? (
@@ -199,4 +197,4 @@ const ChangeProfilePicModal = ({ show, setShow }) => {
   );
 };
 
-export default ChangeProfilePicModal;
+export default ChangeCoverPhotoModal;
