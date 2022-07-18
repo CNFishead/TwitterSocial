@@ -22,12 +22,17 @@ module.exports = asyncHandler(async (req, res, next) => {
     }
     const posts = await Post.find({
       $or: [
-        { user: user._id, replyTo: { $exists: false } },
-        { user: user._id, replyTo: { $exists: true, $ne: null } },
-        // find the posts the user has retweeted
-        { retweetUsers: { $in: [user._id] } },
+        // find the posts the user has replied to
+        { retweetData: { $exists: true }, postedBy: user._id },
+        // find the posts the user has posted, excluding the posts the user has replied to
+        // and excluding the posts the user has retweeted
+        {
+          user: user._id,
+          replyTo: { $exists: false },
+          retweetData: { $exists: false },
+        },
       ],
-    }).sort({ createdAt: -1 });
+    }).sort({ pinned: -1, createdAt: -1 });
 
     await Post.populate(posts, { path: "user" });
     await Post.populate(posts, { path: "retweetData" });

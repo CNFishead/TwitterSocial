@@ -64,11 +64,13 @@ const ProfileScreen = () => {
           <Container className="profileHeaderContainer" fluid>
             <div className="coverPhotoSection">
               <div className="coverPhotoContainer">
-                <Image
-                  src={profile.coverPhoto}
-                  alt="user-profile-image"
-                  fluid
-                />
+                {profile.coverPhoto && (
+                  <Image
+                    src={profile.coverPhoto}
+                    alt="user-profile-image"
+                    fluid
+                  />
+                )}
                 {/* check if logged in user is the one viewing profile */}
                 {user && user._id === profile._id && (
                   <AiFillCamera

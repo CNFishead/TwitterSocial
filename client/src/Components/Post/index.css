@@ -148,7 +148,27 @@
   justify-content: space-evenly;
   text-align: center;
 }
+.pinButton.active, .pinned {
+  color: var(--bs-primary-light);
+}
+.pinned{
+  font-size: 12px;
+}
 
+.pinButton{
+  color: var(--bs-gray-600);
+  width: 5.5%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pinButton:hover{
+  color: var(--bs-primary);
+}
+.pinButton:hover.active{
+  color: var(--bs-secondary);
+}
 .postBody{
   background-color: var(--bs-secondary);
   padding: 2%;
@@ -186,7 +206,9 @@
 .postButtonContainer button.green.active:hover{
   color: var(--bs-green);
 }
-
+.pinned-post {
+  border-bottom: 10px solid var(--bs-primary-light);
+}
 @media (prefers-color-scheme: dark) {
   .modal-content{
     background-color: var(--bs-dark)

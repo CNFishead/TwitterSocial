@@ -38,7 +38,7 @@ module.exports = asyncHandler(async (req, res, next) => {
       return res.status(200).json({
         success: true,
         message: `You are no longer following ${userToBeFollowed.username}.`,
-        user: await userObject(user),
+        user: await userObject(user._id),
       });
     }
     user.following.push(userToBeFollowed._id);
@@ -48,7 +48,7 @@ module.exports = asyncHandler(async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: `You are now following ${userToBeFollowed.username}`,
-      user: await userObject(user),
+      user: await userObject(user._id),
     });
   } catch (error) {
     console.error(error);

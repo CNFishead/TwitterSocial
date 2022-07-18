@@ -36,7 +36,7 @@ module.exports = asyncHandler(async (req, res) => {
     console.log(user);
 
     if (user && (await user.matchPassword(password.trim()))) {
-      res.json({ user: await userObject(user) });
+      res.json({ user: await userObject(user._id) });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
     }

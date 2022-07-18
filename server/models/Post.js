@@ -29,6 +29,10 @@ const PostSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    pinned: {
+      type: Boolean,
+      default: false,
+    },
     retweetData: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",

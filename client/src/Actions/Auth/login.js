@@ -22,7 +22,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
-    await localStorage.setItem("user", JSON.stringify(data));
+    await localStorage.setItem("user", JSON.stringify(data.user));
   } catch (error) {
     errorHandler(error, dispatch, USER_LOGIN_FAIL);
   }

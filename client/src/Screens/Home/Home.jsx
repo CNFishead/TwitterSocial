@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createPost } from "../../Actions/Post/createPost";
 import { getPosts } from "../../Actions/Post/getPosts";
 import Loader from "../../Components/Loader/Loader";
@@ -13,7 +14,7 @@ import "./index.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const {
@@ -30,7 +31,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getPosts());
+    if (!user) {
+      navigate("/auth/login");
+    } else {
+      dispatch(getPosts());
+    }
   }, [user, dispatch, successCreate, successUpdate]);
   return (
     <>

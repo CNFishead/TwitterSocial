@@ -17,7 +17,7 @@ export const updateFollowing = (userToBeFollowed) => {
       dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
       dispatch(setAlert(data.message, "success"));
       // then we need to set the localStorage to the new updated user
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data.user));
       window.location.reload();
     } catch (error) {
       errorHandler(error, dispatch, UPDATE_USER_FAILURE);

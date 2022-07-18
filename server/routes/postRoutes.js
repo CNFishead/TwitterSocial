@@ -6,6 +6,7 @@ const getUserPosts = require("../controllers/Post/getUserPosts");
 const getUserReplies = require("../controllers/Post/getUserReplies");
 const likePost = require("../controllers/Post/likePost");
 const newPost = require("../controllers/Post/newPost");
+const pinPost = require("../controllers/Post/pinPost");
 const removePost = require("../controllers/Post/removePost");
 const { retweet } = require("../controllers/Post/retweet");
 const { protect } = require("../middleware/auth");
@@ -24,6 +25,7 @@ router.route("/:id").get(getPost).delete(removePost);
 router.route("/:id/comment").put(addComment);
 router.route("/:id/like").put(likePost);
 router.route("/:id/retweet").post(retweet);
+router.route("/pin/:id/").get(pinPost);
 router.route(`/`).post(newPost).get(getPosts);
 
 module.exports = router;

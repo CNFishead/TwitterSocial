@@ -1,7 +1,8 @@
 @import url('./bootstrap.min.css');
 
 :root{
-  --dark-light: #3d3d3d
+  --dark-light: #3d3d3d;
+  --bs-primary-light: #4a7db4;
 }
 
 * {
