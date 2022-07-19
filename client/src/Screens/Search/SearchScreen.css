@@ -1,0 +1,28 @@
+.searchBarContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 2%;
+  height: 50px;
+  margin: 5% 0;
+  position: relative;
+}
+.input-group input{
+  border-radius: 50px;
+  border: none;
+  background-color: var(--bs-gray-200);
+}
+/* take off the border during focus on the input 
+   the .form-control has a blue outline we dont want
+*/
+.input-group .form-control:focus{
+  box-shadow: none;
+  background-color: var(--bs-gray-200);
+}
+.input-group .icon{
+  background-color: var(--bs-gray-200);
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 1.5em;
+  color: var(--bs-gray-600)
+}

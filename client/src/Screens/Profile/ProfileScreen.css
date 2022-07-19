@@ -48,7 +48,7 @@
   display: none;
 }
 .userImageContainer:hover .profilePicButton, 
-.coverPhotoSection:hover .coverPhotoButton {
+.coverPhotoContainer:hover .coverPhotoButton {
   display: block;
   cursor: pointer;
 }

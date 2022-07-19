@@ -1,5 +1,9 @@
 import {
   CLEAR_SELECTED_USER,
+  CLEAR_USERS,
+  GET_USERS_FAILURE,
+  GET_USERS_REQUEST,
+  GET_USERS_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -66,3 +70,29 @@ export const updateUserReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const listUsersReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload.users || action.payload,
+      };
+    case GET_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_USERS:
+      return {};
+    default:
+      return state;
+  }
+}

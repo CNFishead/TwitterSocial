@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import "./ChangeCoverPhotoModal.css";
@@ -18,8 +18,6 @@ import { errorHandler } from "../../../utils/errorHandler";
 const ChangeCoverPhotoModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
   const [cropper, setCropper] = useState(false);
-  const [cropperJS, setCropperJS] = useState(false);
-  const [cropperCSS, setCropperCSS] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [filename, setFilename] = useState("");
@@ -88,7 +86,6 @@ const ChangeCoverPhotoModal = ({ show, setShow }) => {
       const i = document.getElementById("preview");
       i.src = e.target.result;
       // now we can work with cropper
-      if (cropper) {
         // get the image and set it to the cropper
         setCropper(
           new Cropper(document.getElementById("preview"), {
@@ -96,55 +93,10 @@ const ChangeCoverPhotoModal = ({ show, setShow }) => {
             background: false,
           })
         );
-      } else {
-        dispatch(setAlert(`Photo selection failed`, "danger"));
-      }
     };
     reader.readAsDataURL(file);
   };
 
-  // need to add the cropperjs to the dom
-  useEffect(() => {
-    async function copperjs() {
-      const script = document.createElement("script");
-      script.id = "cropperjs";
-      script.type = "text/javascript";
-      script.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js";
-      script.async = true;
-      script.onload = () => {
-        setCropperJS(true);
-        console.log("cropperjs loaded");
-      };
-      await document.body.appendChild(script);
-    }
-    async function croppercss() {
-      const link = document.createElement("link");
-      link.id = "croppercss";
-      link.rel = "stylesheet";
-      link.href =
-        "https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css";
-      link.async = true;
-      link.onload = () => {
-        setCropperCSS(true);
-        console.log("croppercss loaded");
-      };
-      await document.body.appendChild(link);
-    }
-    copperjs();
-    croppercss();
-    if (cropperCSS && cropperJS) {
-      setCropper(true);
-    }
-    return () => {
-      document.body.removeChild(document.getElementById("cropperjs"));
-      document.body.removeChild(document.getElementById("croppercss"));
-      const i = document.getElementById("preview");
-      if (i) {
-        i.src = "";
-      }
-    };
-  }, [cropperCSS, cropperJS]);
   return (
     <Modal
       show={show}
@@ -161,7 +113,7 @@ const ChangeCoverPhotoModal = ({ show, setShow }) => {
         ) : (
           <>
             <div className="imagePreviewContainer">
-              <img id="preview" />
+              <img id="preview" alt="preview-container" />
             </div>
             <Form.Group>
               <Form.Label>Image</Form.Label>

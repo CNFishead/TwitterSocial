@@ -7,12 +7,12 @@ import {
 import { errorHandler } from "../../utils/errorHandler";
 
 export const getPosts =
-  (followingOnly = true) =>
+  (followingOnly = true, keyword = "") =>
   async (dispatch) => {
     dispatch({ type: POST_GET_REQUEST });
     try {
       const { data } = await axios.get(
-        `/api/posts?followingOnly=${followingOnly}`
+        `/api/posts?followingOnly=${followingOnly}&keyword=${keyword}`
       );
       dispatch({ type: POST_GET_SUCCESS, payload: data });
     } catch (error) {

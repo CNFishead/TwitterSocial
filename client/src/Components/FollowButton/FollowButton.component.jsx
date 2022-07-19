@@ -21,7 +21,7 @@ const FollowButton = ({ user, userToFollow }) => {
     <Link
       to="#"
       className={`${
-        user.following.includes(userToFollow._id) && styles.active
+        user.following.includes(userToFollow._id) && `active`
       } followButton`}
       onClick={handleFollow}
     >

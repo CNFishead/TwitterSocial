@@ -25,8 +25,21 @@ module.exports = asyncHandler(async (req, res, next) => {
         .status(400)
         .json({ message: `Please make sure to upload an image` });
     }
+    // convert the blob to a binary string
+    const buffer = await new Buffer.from(file.data, {
+      encoding: "binary",
+    });
+    console.log(buffer);
+    // file.size is in bytes, convert it kilobytes and then megabytes and compare it to the max size
+    const fileSize = file.size;
+    console.log(file);
+    console.log(
+      `File size: ${fileSize / 1024}, Max size: ${
+        process.env.MAX_FILE_UPLOAD
+      }, is Larger: ${fileSize > process.env.MAX_FILE_UPLOAD}`
+    );
     // Check file size
-    if (file.size > process.env.MAX_FILE_UPLOAD) {
+    if (fileSize > process.env.MAX_FILE_UPLOAD) {
       return res.status(400).json({
         message: `File was too large, please upload an image less than ${process.env.MAX_FILE_UPLOAD} or 1MB`,
       });
@@ -59,18 +72,6 @@ module.exports = asyncHandler(async (req, res, next) => {
         const updatedUser = await User.findByIdAndUpdate(req.user._id, {
           profileImageUrl: `/images/${file.name}`,
         });
-
-        // update all of the users Posts with the new imageURL
-        // await Post.updateMany(
-        //   {
-        //     user: req.user._id,
-        //   },
-        //   {
-        //     $set: {
-        //       profileImageUrl: `/images/${file.name}`,
-        //     },
-        //   }
-        // );
 
         // Tell the client the upload was successful and send back the file sharing link
         res.status(201).json({

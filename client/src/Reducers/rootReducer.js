@@ -8,7 +8,11 @@ import {
   postDetailsReducer,
   updatePostReducer,
 } from "./postReducer";
-import { selectedUserReducer, updateUserReducer } from "./userReducer";
+import {
+  listUsersReducer,
+  selectedUserReducer,
+  updateUserReducer,
+} from "./userReducer";
 
 const postReducers = combineReducers({
   createPost: createPostReducer,
@@ -21,6 +25,7 @@ const postReducers = combineReducers({
 const userReducers = combineReducers({
   selectedUser: selectedUserReducer,
   updateUser: updateUserReducer,
+  listUsers: listUsersReducer,
 });
 
 export const rootReducer = combineReducers({

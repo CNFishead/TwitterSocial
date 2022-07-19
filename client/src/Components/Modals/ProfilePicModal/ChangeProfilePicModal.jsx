@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Image, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import "./ChangeProfilePicModal.css";
 import Cropper from "cropperjs";
@@ -7,7 +7,6 @@ import Loader from "../../Loader/Loader";
 import { setAlert } from "../../../Actions/alert";
 import axios from "axios";
 import { errorHandler } from "../../../utils/errorHandler";
-import { USER_LOGIN_SUCCESS } from "../../../Constants/authConstants";
 
 /**
  * @description - Modal to change the users profile picture
@@ -163,7 +162,7 @@ const ChangeProfilePicModal = ({ show, setShow }) => {
         ) : (
           <>
             <div className="imagePreviewContainer">
-              <img id="preview" />
+              <img id="preview" alt="preview-container" />
             </div>
             <Form.Group>
               <Form.Label>Image</Form.Label>

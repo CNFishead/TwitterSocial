@@ -23,7 +23,9 @@ module.exports = asyncHandler(async (req, res) => {
     }
     const newUser = await User.create(req.body);
     if (newUser) {
-      res.status(201).json({ user: await userObject(newUser) });
+      res.status(201).json({ user: await userObject(newUser._id) });
+    } else {
+      res.status(500).json({ message: "Something went wrong" });
     }
   } catch (error) {
     console.error(error);

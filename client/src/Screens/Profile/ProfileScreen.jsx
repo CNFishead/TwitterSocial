@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styles from "./ProfileScreen.module.css";
 import { useState } from "react";
 import { Container, Image, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,8 @@ import FollowButton from "../../Components/FollowButton/FollowButton.component";
 import ChangeProfilePicModal from "../../Components/Modals/ProfilePicModal/ChangeProfilePicModal";
 import { AiFillCamera } from "react-icons/ai";
 import ChangeCoverPhotoModal from "../../Components/Modals/CoverPhotoModal/ChangeCoverPhotoModal";
+
+
 const ProfileScreen = () => {
   // utility
   const dispatch = useDispatch();
