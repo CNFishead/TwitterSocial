@@ -17,7 +17,13 @@ import PostItem from "../Post/PostItem";
  * @returns {JSX} - JSX representation of component
  *
  */
-const ReplyModal = ({ show, handleClose, post, user, setShow }) => {
+const ReplyModal = ({
+  show,
+  handleClose,
+  post,
+  user,
+  setShow,
+}) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e, reply) => {

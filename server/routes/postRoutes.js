@@ -9,6 +9,7 @@ const newPost = require("../controllers/Post/newPost");
 const pinPost = require("../controllers/Post/pinPost");
 const removePost = require("../controllers/Post/removePost");
 const { retweet } = require("../controllers/Post/retweet");
+const searchPosts = require("../controllers/Post/searchPosts");
 const { protect } = require("../middleware/auth");
 const router = express.Router();
 
@@ -26,6 +27,7 @@ router.route("/:id/comment").put(addComment);
 router.route("/:id/like").put(likePost);
 router.route("/:id/retweet").post(retweet);
 router.route("/pin/:id/").get(pinPost);
+router.route("/post-search/search").get(searchPosts);
 router.route(`/`).post(newPost).get(getPosts);
 
 module.exports = router;

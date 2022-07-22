@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Image, Nav, Tab, Tabs } from "react-bootstrap";
+import { Container, Image, Nav } from "react-bootstrap";
 import { BsEnvelope } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";

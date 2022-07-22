@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch, } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateFollowing } from "../../Actions/User/updateFollowing";
-import styles from "./FollowButton.module.css";
 
 /**
  * @description - FollowButton component, made to be reused anywhere a follow button is needed

@@ -36,7 +36,7 @@ const Home = () => {
     } else {
       dispatch(getPosts());
     }
-  }, [user, dispatch, successCreate, successUpdate]);
+  }, [user, dispatch, successCreate, successUpdate, navigate]);
   return (
     <>
       <ReplyModal

@@ -13,7 +13,6 @@ import NotFound from "./Screens/NotFound";
 import Alert from "./Components/Alert/Alert";
 import Navbar from "./Layouts/Navbar/Navbar";
 import ProfileRoutes from "./Routes/ProfileRoutes";
-import SearchRoutes from "./Routes/SearchRoutes";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -32,14 +31,6 @@ function App() {
           )}
           <Col lg={!user ? 12 : 8} md={10} xs={11} className="main">
             <Routes>
-              <Route
-                path="/search/*"
-                element={
-                  <PrivateRoute>
-                    <SearchRoutes />
-                  </PrivateRoute>
-                }
-              />
               <Route
                 path="/dashboard/*"
                 element={

@@ -50,7 +50,11 @@ const Navbar = () => {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={Link} to="/dashboard/messages" className="icon-container">
+        <Nav.Link
+          as={Link}
+          to="/dashboard/messages/inbox"
+          className="icon-container"
+        >
           <BsEnvelope className="icon" />
         </Nav.Link>
       </Nav.Item>

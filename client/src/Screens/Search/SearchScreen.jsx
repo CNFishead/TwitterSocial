@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SearchScreen.css";
-import { Button, Container, Form, InputGroup, Nav } from "react-bootstrap";
+import { Container, Form, InputGroup, Nav } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import SearchPosts from "./views/SearchPosts.view";
 import SearchUsers from "./views/SearchUsers.view";
@@ -15,6 +15,9 @@ const SearchScreen = () => {
   const [show, setShow] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
+  const {
+    selectedPost: { post },
+  } = useSelector((state) => state.post);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -50,13 +53,19 @@ const SearchScreen = () => {
       <Container fluid className="tabsContainer">
         <Nav variant="tabs" defaultActiveKey={view}>
           <Nav.Item
-            onClick={() => setView("posts")}
+            onClick={() => {
+              setView("posts");
+              setSearch("");
+            }}
             className={`tab ${view === "posts" && "active"}`}
           >
             Posts
           </Nav.Item>
           <Nav.Item
-            onClick={() => setView("users")}
+            onClick={() => {
+              setView("users");
+              setSearch("");
+            }}
             className={`tab ${view === "users" && "active"}`}
           >
             Users
@@ -67,6 +76,7 @@ const SearchScreen = () => {
         <ReplyModal show={show} setShow={setShow} />
         {view === "posts" && (
           <SearchPosts
+            post={post}
             keyword={search}
             show={show}
             setShow={setShow}

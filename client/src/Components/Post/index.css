@@ -46,7 +46,7 @@
 .buttonsContainer{
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   padding: 2%;
 }
@@ -124,7 +124,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   position: absolute;
   margin-bottom: 2.5%;
 }

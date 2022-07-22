@@ -16,6 +16,7 @@ export const errorHandler = (error, dispatch, constant) => {
   if (message === "Not authorized, token failed") {
     dispatch(logout());
   }
+  // eslint-disable-next-line no-lone-blocks
   {
     constant &&
       dispatch({
