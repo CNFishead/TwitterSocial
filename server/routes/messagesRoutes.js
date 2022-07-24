@@ -1,4 +1,6 @@
 const express = require("express");
+const createChat = require("../controllers/chats/createChat");
+const getChats = require("../controllers/chats/getChats");
 const { protect } = require("../middleware/auth");
 
 const router = express.Router();
@@ -14,8 +16,6 @@ const router = express.Router();
  */
 router.use(protect);
 
-router.get("/").get(() => {
-  console.log("search");
-});
+router.route("/").get(getChats).post(createChat);
 
 module.exports = router;

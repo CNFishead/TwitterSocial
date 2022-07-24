@@ -9,7 +9,7 @@ const Alert = () => {
     <div className="alert-wrapper">
       {alert.map((alert) => (
         <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-          {alert.message}
+          <span>{alert.message}</span>
         </div>
       ))}
     </div>

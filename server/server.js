@@ -13,6 +13,7 @@ const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 const searchRoutes = require("./routes/searchRoutes");
+const messagesRoutes = require("./routes/messagesRoutes");
 
 // import middleware
 const mongoSanitize = require("express-mongo-sanitize");
@@ -50,6 +51,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/messages", messagesRoutes);
 
 // Set static folder
 app.use(express.static(path.join(path.resolve(__dirname), "../public")));

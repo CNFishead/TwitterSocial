@@ -30,6 +30,10 @@ a{
   font-size: 1.25em;
   color: var(--bs-dark)
 }
+.titleContainer .icon:hover{
+  cursor: pointer;
+  color: var(--bs-primary-light);
+}
 
 .main {
   background-color: var(--bs-gray-300);

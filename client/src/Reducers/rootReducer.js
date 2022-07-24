@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { alert } from "./alertReducer";
 import { authReducer } from "./authReducer";
+import { createChatReducer, getChatsReducer } from "./chatReducer";
 import {
   createPostReducer,
   deletePostReducer,
@@ -28,6 +29,11 @@ const userReducers = combineReducers({
   listUsers: listUsersReducer,
 });
 
+const chatReducers = combineReducers({
+  createChat: createChatReducer,
+  listChats: getChatsReducer,
+});
+
 export const rootReducer = combineReducers({
   // Alert reducer
   alert: alert,
@@ -37,4 +43,6 @@ export const rootReducer = combineReducers({
   post: postReducers,
   // User Reducers
   user: userReducers,
+  // Chat Reducers
+  message: chatReducers,
 });

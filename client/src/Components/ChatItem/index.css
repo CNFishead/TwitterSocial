@@ -1,0 +1,58 @@
+
+.resultListItem {
+  padding: 7px;
+  display: flex;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--lightGrey);
+}
+
+.resultListItem:hover {
+  background-color: #F2F2F2;
+}
+
+.resultsDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.resultsDetailsContainer .heading {
+  font-weight: 500;
+}
+
+.resultsDetailsContainer .subText {
+  color: var(--greyText);
+  font-size: 14px;
+}
+
+.resultListItem img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.resultImageContainer{
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  position: relative;
+}
+.imageContainer.groupChatImage img {
+  height: 65%;
+  width: 65%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 2px solid #fff;
+}
+
+/* we need to target one of the images that has the groupChatImage selector
+   and have it go to the top right of the container
+*/
+.imageContainer.groupChatImage.firstImage img{
+  margin: 0 auto;
+  top: 0;
+  right: 0;
+}
