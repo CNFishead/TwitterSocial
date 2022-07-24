@@ -16,17 +16,31 @@ module.exports = asyncHandler(async (req, res, next) => {
         $match: {
           // we need to locate posts from users that the user is following
           // we also want to find the post that is pinned by the user if any, and make that the first post
-          $or: [
-            { user: { $in: req.user.following } },
-            { user: req.user._id },
-            { user: req.user._id, pinned: true },
-          ],
+          $or: [{ user: { $in: req.user.following } }, { user: req.user._id }],
+        },
+      },
+      {
+        $addFields: {
+          // we need to add a helper field to filter out pinned posts that dont belong to the logged in user making the request
+          // if the post is pinned and the user is not the owner of the post, then we need to set the pinned field to false
+          pinned: {
+            $cond: {
+              // check if the post is pinned
+              if: { $eq: ["$pinned", true] },
+              // if the post is pinned and the user is the owner of the post, then we need to set the pinned field to true
+              then: { $eq: ["$user", req.user._id] },
+              // if the post is not pinned, or the user is not the owner of the post, set the field to default to false
+              else: false,
+            },
+          },
         },
       },
       // sort by pinned first, then by date
       {
         $sort: {
+          // sort by the users pinned post first
           pinned: -1,
+          // sort by createdAt
           createdAt: -1,
         },
       },

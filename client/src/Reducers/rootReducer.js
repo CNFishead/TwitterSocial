@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { alert } from "./alertReducer";
 import { authReducer } from "./authReducer";
-import { createChatReducer, getChatsReducer } from "./chatReducer";
+import { createChatReducer, getChatReducer, getChatsReducer } from "./chatReducer";
 import {
   createPostReducer,
   deletePostReducer,
@@ -32,6 +32,7 @@ const userReducers = combineReducers({
 const chatReducers = combineReducers({
   createChat: createChatReducer,
   listChats: getChatsReducer,
+  selectedChat: getChatReducer,
 });
 
 export const rootReducer = combineReducers({

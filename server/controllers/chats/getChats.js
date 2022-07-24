@@ -24,6 +24,11 @@ module.exports = asyncHandler(async (req, res, next) => {
           as: "users",
         },
       },
+      {
+        $sort: {
+          updatedAt: -1,
+        },
+      },
     ]);
 
     res.status(200).json({

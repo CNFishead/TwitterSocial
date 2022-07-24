@@ -99,7 +99,7 @@ const ProfileScreen = () => {
               {profile._id !== user._id && (
                 <>
                   <Link
-                    to={`/messages/${profile._id}`}
+                    to={`/dashboard/messages/inbox/${profile._id}`}
                     className="profileButton"
                   >
                     <BsEnvelope />

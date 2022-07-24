@@ -1,6 +1,9 @@
 const express = require("express");
 const createChat = require("../controllers/chats/createChat");
+const deleteSingleChat = require("../controllers/chats/deleteSingleChat");
 const getChats = require("../controllers/chats/getChats");
+const getSingleChat = require("../controllers/chats/getSingleChat");
+const updateSingleChat = require("../controllers/chats/updateSingleChat");
 const { protect } = require("../middleware/auth");
 
 const router = express.Router();
@@ -17,5 +20,10 @@ const router = express.Router();
 router.use(protect);
 
 router.route("/").get(getChats).post(createChat);
+router
+  .route("/:id")
+  .get(getSingleChat)
+  .put(updateSingleChat)
+  .delete(deleteSingleChat);
 
 module.exports = router;

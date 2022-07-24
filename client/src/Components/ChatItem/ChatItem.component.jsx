@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ const ChatItem = ({ chat }) => {
   // set the images array to the first user's profile image
   images.push(chat.users[0].profileImageUrl);
   // if the chat is a group chat, add the second user's profile image to the images array
-  if (chat.users.length > 1) {
+  if (chat.users.length > 1 && chat.isGroupChat) {
     images.push(chat.users[1].profileImageUrl);
   }
 
@@ -38,7 +38,7 @@ const ChatItem = ({ chat }) => {
             </div>
           ))}
       </div>
-      <div className={`resultsDetailsContainer`}>
+      <div className={`resultsDetailsContainer ellipsis`}>
         <span className={`heading`}>
           {/* If chat name doesnt exist, just list the first two users, first names */}
           {chat.chatName
@@ -50,9 +50,9 @@ const ChatItem = ({ chat }) => {
               }`}
         </span>
         {chat.lastMessage ? (
-          <span className={`subText`}>lastest Message</span>
+          <span className={`subText ellipsis`}>lastest Message</span>
         ) : (
-          <span className={`subText`}>No messages</span>
+          <span className={`subText ellipsis`}>No messages</span>
         )}
       </div>
     </Link>
