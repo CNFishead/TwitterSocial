@@ -24,6 +24,17 @@
   color: var(--greyText);
   font-size: 14px;
 }
+.subTextContainer {
+  display: flex;
+  flex: 1;
+}
+.subTextContainer .subText {
+  margin-left: 5px;
+}
+.subTextContainer .subText.timeStamp {
+  flex: 1;
+  text-align: end;
+}
 
 .resultListItem img {
   height: 100%;

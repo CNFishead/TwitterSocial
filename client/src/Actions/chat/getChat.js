@@ -10,7 +10,7 @@ export const getChat = (id) => {
   return (dispatch) => {
     dispatch({ type: GET_CHAT_REQUEST });
     return axios
-      .get(`/api/messages/${id}`)
+      .get(`/api/chat/${id}`)
       .then((response) => {
         dispatch({ type: GET_CHAT_SUCCESS, payload: response.data });
       })

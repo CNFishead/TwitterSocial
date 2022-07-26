@@ -13,6 +13,7 @@ import {
   UPDATE_CHAT_REQUEST,
   UPDATE_CHAT_SUCCESS,
 } from "../Constants/chatsConstants";
+import { SEND_MESSAGE_SUCCESS } from "../Constants/postConstants";
 
 // create chat reducer
 export const createChatReducer = (state = {}, action) => {
@@ -78,7 +79,8 @@ export const getChatReducer = (state = {}, action) => {
         ...state,
         loading: false,
         success: true,
-        chat: action.payload.data,
+        chat: action.payload.chat,
+        messages: action.payload.messages,
       };
     case GET_CHAT_FAILURE:
       return {
@@ -86,6 +88,12 @@ export const getChatReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case SEND_MESSAGE_SUCCESS:
+      return {
+        ...state,
+        messages: [...state.messages, action.payload],
+      };
+
     default:
       return state;
   }

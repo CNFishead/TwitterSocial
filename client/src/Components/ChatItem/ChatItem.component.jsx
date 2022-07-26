@@ -3,6 +3,8 @@ import "./index.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../../Actions/alert";
+import { timeDifference } from "../../utils/timeDifference";
+import { Container } from "react-bootstrap";
 
 const ChatItem = ({ chat }) => {
   const dispatch = useDispatch();
@@ -49,8 +51,19 @@ const ChatItem = ({ chat }) => {
                   : ""
               }`}
         </span>
-        {chat.lastMessage ? (
-          <span className={`subText ellipsis`}>lastest Message</span>
+        {chat.latestMessage ? (
+          <span className="subTextContainer">
+            <span className={`subText ellipsis`}>
+              {chat.latestMessage.sender.firstName}:{" "}
+              {chat.latestMessage.content}
+            </span>
+            <span className="subText timeStamp">
+              {timeDifference(
+                new Date(),
+                new Date(chat.latestMessage.createdAt)
+              )}
+            </span>
+          </span>
         ) : (
           <span className={`subText ellipsis`}>No messages</span>
         )}

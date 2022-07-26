@@ -25,11 +25,27 @@ module.exports = asyncHandler(async (req, res, next) => {
         },
       },
       {
+        $unwind: {
+          path: "$latestMessage",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $sort: {
           updatedAt: -1,
         },
       },
     ]);
+    for (const c of chats) {
+      await Chat.populate(c, {
+        path: "latestMessage",
+        model: "Message",
+      });
+      await Chat.populate(c, {
+        path: "latestMessage.sender",
+        model: "User",
+      });
+    }
 
     res.status(200).json({
       success: true,

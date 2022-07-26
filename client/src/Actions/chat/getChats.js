@@ -10,7 +10,7 @@ export const getChats = () => {
   return async (dispatch) => {
     dispatch({ type: GET_CHATS_REQUEST });
     try {
-      const { data } = await axios.get(`/api/messages`);
+      const { data } = await axios.get(`/api/chat`);
       dispatch({ type: GET_CHATS_SUCCESS, payload: data.chats });
     } catch (error) {
       errorHandler(error, dispatch, GET_CHATS_FAILURE);

@@ -43,7 +43,16 @@ const Followers = () => {
         <>
           <Meta title={`Tweetr | ${profile.firstName}'s Followers`} />
           <Container className="profileHeaderContainer" fluid>
-            <div className="coverPhotoContainer">
+            <div className="coverPhotoSection">
+              <div className="coverPhotoContainer">
+                {profile.coverPhoto && (
+                  <Image
+                    src={profile.coverPhoto}
+                    alt="user-profile-image"
+                    fluid
+                  />
+                )}
+              </div>
               <div className="userImageContainer">
                 <Image
                   src={profile.profileImageUrl}
@@ -102,7 +111,12 @@ const Followers = () => {
               {view === "followers" && (
                 <Container fluid className="followersContainer">
                   {profile.followers.map((u) => (
-                    <UserItem key={u._id} user={u} loggedInUser={user} showFollowButton={true}/>
+                    <UserItem
+                      key={u._id}
+                      user={u}
+                      loggedInUser={user}
+                      showFollowButton={true}
+                    />
                   ))}
                 </Container>
               )}

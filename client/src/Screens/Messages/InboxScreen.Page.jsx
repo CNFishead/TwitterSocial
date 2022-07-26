@@ -15,7 +15,7 @@ const InboxScreen = () => {
 
   const {
     listChats: { chats, loading },
-  } = useSelector((state) => state.message);
+  } = useSelector((state) => state.chat);
   useEffect(() => {
     dispatch(getChats());
   }, [dispatch, navigate]);
@@ -36,7 +36,7 @@ const InboxScreen = () => {
         {loading ? (
           <Loader />
         ) : chats && chats.length > 0 ? (
-          chats.map((chat) => <ChatItem key={chat.id} chat={chat} />)
+          chats.map((chat) => <ChatItem key={chat._id} chat={chat} />)
         ) : (
           <h1>No chats</h1>
         )}

@@ -29,6 +29,7 @@ const PostItem = ({
   show,
   showRetweet = true,
   userId,
+  showButtons = true,
 }) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
@@ -146,6 +147,7 @@ const PostItem = ({
                         retweeted={retweeted}
                         setShow={setShow}
                         show={show}
+                        showButtons={false}
                       />
                     </Container>
                   )}
@@ -156,45 +158,50 @@ const PostItem = ({
                   )}
                 </Container>
                 <Container className="postFooter">
-                  <Row className="postButtonContainer">
-                    <Col>
-                      <button
-                        id="comment"
-                        onClick={() => {
-                          dispatch({ type: GET_SELECTED_POST, payload: post });
-                          setShow(!show);
-                        }}
-                        className={`green ${retweeted ? `active` : ""}`}
-                      >
-                        <MdChatBubble /> {post.comments.length}
-                      </button>
-                    </Col>
-
-                    {isRetweet && retweetedBy !== post.user._id && (
+                  {showButtons && (
+                    <Row className="postButtonContainer">
                       <Col>
                         <button
-                          id="retweet"
-                          onClick={retweetHandler}
-                          className={`green ${retweeted ? `active` : ""}`}
+                          id="comment"
+                          onClick={() => {
+                            dispatch({
+                              type: GET_SELECTED_POST,
+                              payload: post,
+                            });
+                            setShow(!show);
+                          }}
+                          className={`green`}
                         >
-                          <FaRetweet /> {post.retweetUsers.length}
-                        </button>{" "}
+                          <MdChatBubble /> {post.comments.length}
+                        </button>
                       </Col>
-                    )}
 
-                    <Col>
-                      <button
-                        id="like"
-                        onClick={likeHandler}
-                        className={`red ${liked ? `active` : ""}`}
-                      >
-                        <FaHeart />{" "}
-                        <span style={{ fontSize: ".8rem" }}>
-                          {post.likes.length}
-                        </span>
-                      </button>
-                    </Col>
-                  </Row>
+                      {isRetweet && retweetedBy !== post.user._id && (
+                        <Col>
+                          <button
+                            id="retweet"
+                            onClick={retweetHandler}
+                            className={`green ${retweeted ? `active` : ""}`}
+                          >
+                            <FaRetweet /> {post.retweetUsers.length}
+                          </button>{" "}
+                        </Col>
+                      )}
+
+                      <Col>
+                        <button
+                          id="like"
+                          onClick={likeHandler}
+                          className={`red ${liked ? `active` : ""}`}
+                        >
+                          <FaHeart />{" "}
+                          <span style={{ fontSize: ".8rem" }}>
+                            {post.likes.length}
+                          </span>
+                        </button>
+                      </Col>
+                    </Row>
+                  )}
                 </Container>
               </Container>
             </div>

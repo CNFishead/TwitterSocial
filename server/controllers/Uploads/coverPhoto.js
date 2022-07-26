@@ -25,13 +25,7 @@ module.exports = asyncHandler(async (req, res, next) => {
         .status(400)
         .json({ message: `Please make sure to upload an image` });
     }
-    // Check file size
-    if (file.size > process.env.MAX_FILE_UPLOAD) {
-      return res.status(400).json({
-        message: `File was too large, please upload an image less than ${process.env.MAX_FILE_UPLOAD} or 1MB`,
-      });
-    }
-
+    
     // ***NOTE*** Path.parse() returns a {}, youll need to .name to access {name: String} for slugify
     console.log(req.headers.filename);
     // get the filename from the req.headers filename property

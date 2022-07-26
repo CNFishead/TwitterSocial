@@ -5,7 +5,11 @@
   padding: 2%;
 }
 .chatPageContainer{
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  flex-basis: 0;
 }
 #chatName {
   width: 100%;
@@ -40,11 +44,13 @@
 .chatContainer .footer textarea{
   flex: 1;
   background-color: rgba(0, 0, 0, 0.05);
-  padding: 8px 15px;
+  padding: 12px 15px;
   border-radius: 18px;
+  display: flex;
+  align-items: center;
   border: none;
   resize: none;
-  height: 38px;
+  height: 50px;
 }
 
 .chatContainer .footer .sendMessageButton{
@@ -72,7 +78,11 @@
 .chatPageContainer .overflow-container span{
   width: auto;
 }
-
+.mainContentContainer{
+  display: flex;
+  flex: 1;
+  overflow-y: hidden;
+}
 #tooltip-overflow-user-container{
   display: flex;
   flex-direction: column;

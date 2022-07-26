@@ -3,6 +3,7 @@ const Chat = require("../../models/Chat");
 const asyncHandler = require("../../middleware/asyncHandler");
 const { default: mongoose } = require("mongoose");
 const User = require("../../models/User");
+const Message = require("../../models/Message");
 
 /**
  * @desc     Get a single chat, returns a chat object and all the messages in it
@@ -30,9 +31,9 @@ module.exports = asyncHandler(async (req, res, next) => {
       },
     ]);
 
+    // * Aggregation returns an array, we want the first result
     chat = chat[0];
 
-    // * Aggregation returns an array, we want the first result
     if (!chat) {
       // if the chat doesn't exist, check to see if they are trying to access the chat by a userId
       let user = await User.findById(req.params.id);
@@ -49,11 +50,28 @@ module.exports = asyncHandler(async (req, res, next) => {
         message: "Chat not found",
       });
     }
+    // now we want to find all the messages related to this chat
+    const messages = await Message.aggregate([
+      {
+        $match: {
+          chat: mongoose.Types.ObjectId(chat._id),
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+    ]);
+    // populate the messages sender
+    for (const m of messages) {
+      await Message.populate(m, {
+        path: "sender",
+        model: "User",
+      });
+    }
 
-    res.status(200).json({
-      success: true,
-      data: chat,
-    });
+    res.status(200).json({ chat, messages });
   } catch (error) {
     errorHandler(error, req, res, next);
   }

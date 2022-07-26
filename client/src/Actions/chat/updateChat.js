@@ -10,7 +10,7 @@ export const updateChat = (chat) => {
   return async (dispatch) => {
     dispatch({ type: UPDATE_CHAT_REQUEST });
     try {
-      const { data } = await axios.put(`/api/messages/${chat.id}`, chat);
+      const { data } = await axios.put(`/api/chat/${chat.id}`, chat);
       dispatch({ type: UPDATE_CHAT_SUCCESS, payload: data });
     } catch (error) {
       errorHandler(error, dispatch, UPDATE_CHAT_FAILURE);
