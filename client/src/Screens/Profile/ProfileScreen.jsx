@@ -14,7 +14,6 @@ import ChangeProfilePicModal from "../../Components/Modals/ProfilePicModal/Chang
 import { AiFillCamera } from "react-icons/ai";
 import ChangeCoverPhotoModal from "../../Components/Modals/CoverPhotoModal/ChangeCoverPhotoModal";
 
-
 const ProfileScreen = () => {
   // utility
   const dispatch = useDispatch();
@@ -31,6 +30,10 @@ const ProfileScreen = () => {
   const {
     selectedUser: { user: selectedUser },
   } = useSelector((state) => state.user);
+  // get the socket connection
+  const {
+    socketConnection: { socket },
+  } = useSelector((state) => state.socket);
 
   const handleClose = () => setShowModal(false);
 
@@ -41,7 +44,7 @@ const ProfileScreen = () => {
     } else {
       // get user from api
       // set profile to user
-      if (!selectedUser || selectedUser.username !== username) {
+      if (!selectedUser || (selectedUser.username !== username && selectedUser._id !== username)) {
         dispatch(getUserUsername(username));
       } else {
         setProfile(selectedUser);
@@ -52,60 +55,32 @@ const ProfileScreen = () => {
     <>
       {profile && (
         <>
-          <ChangeProfilePicModal
-            show={showModal}
-            setShow={setShowModal}
-            handleClose={handleClose}
-          />
-          <ChangeCoverPhotoModal
-            show={showCoverPhotoModal}
-            setShow={setShowCoverPhotoModal}
-          />
+          <ChangeProfilePicModal show={showModal} setShow={setShowModal} handleClose={handleClose} />
+          <ChangeCoverPhotoModal show={showCoverPhotoModal} setShow={setShowCoverPhotoModal} />
           <Meta title={`Tweetr | ${profile.firstName}'s Profile`} />
           <Container className="profileHeaderContainer" fluid>
             <div className="coverPhotoSection">
               <div className="coverPhotoContainer">
-                {profile.coverPhoto && (
-                  <Image
-                    src={profile.coverPhoto}
-                    alt="user-profile-image"
-                    fluid
-                  />
-                )}
+                {profile.coverPhoto && <Image src={profile.coverPhoto} alt="user-profile-image" fluid />}
                 {/* check if logged in user is the one viewing profile */}
                 {user && user._id === profile._id && (
-                  <AiFillCamera
-                    onClick={() => setShowCoverPhotoModal(!showCoverPhotoModal)}
-                    className="coverPhotoButton"
-                  />
+                  <AiFillCamera onClick={() => setShowCoverPhotoModal(!showCoverPhotoModal)} className="coverPhotoButton" />
                 )}
               </div>
               <div className="userImageContainer">
-                <Image
-                  src={profile.profileImageUrl}
-                  alt="user-profile-image"
-                  fluid
-                />
+                <Image src={profile.profileImageUrl} alt="user-profile-image" fluid />
                 {/* check if logged in user is the one viewing profile */}
-                {user && user._id === profile._id && (
-                  <AiFillCamera
-                    onClick={() => setShowModal(!showModal)}
-                    className="profilePicButton"
-                  />
-                )}
+                {user && user._id === profile._id && <AiFillCamera onClick={() => setShowModal(!showModal)} className="profilePicButton" />}
               </div>
             </div>
             <div className="profileButtonsContainer">
               {profile._id !== user._id && (
                 <>
-                  <Link
-                    to={`/dashboard/messages/inbox/${profile._id}`}
-                    className="profileButton"
-                  >
+                  <Link to={`/dashboard/messages/inbox/${profile._id}`} className="profileButton">
                     <BsEnvelope />
                   </Link>
 
-                  <FollowButton user={user} userToFollow={profile} />
+                  <FollowButton user={user} userToFollow={profile} socket={socket} />
                 </>
               )}
             </div>
@@ -127,23 +102,17 @@ const ProfileScreen = () => {
           </Container>
           <Container fluid className="tabsContainer">
             <Nav variant="tabs" defaultActiveKey={view}>
-              <Nav.Item
-                onClick={() => setView("tweets")}
-                className={`tab ${view === "tweets" && "active"}`}
-              >
+              <Nav.Item onClick={() => setView("tweets")} className={`tab ${view === "tweets" && "active"}`}>
                 Tweets
               </Nav.Item>
-              <Nav.Item
-                onClick={() => setView("replies")}
-                className={`tab ${view === "replies" && "active"}`}
-              >
+              <Nav.Item onClick={() => setView("replies")} className={`tab ${view === "replies" && "active"}`}>
                 Replies
               </Nav.Item>
             </Nav>
           </Container>
           <Container fluid className="profileContentContainer">
-            {view === "tweets" && <TweetsView user={profile} />}
-            {view === "replies" && <Replies user={profile} />}
+            {view === "tweets" && <TweetsView user={profile} socket={socket} />}
+            {view === "replies" && <Replies user={profile} socket={socket} />}
           </Container>
         </>
       )}

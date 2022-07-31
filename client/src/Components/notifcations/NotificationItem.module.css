@@ -1,0 +1,23 @@
+.notification {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 3px;
+  border-radius: 10px;
+}
+.notification.active{
+  background-color: rgba(140, 219, 255, 0.3);
+}
+.notification.active:hover{
+  background-color: rgba(140, 219, 255, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  .notification.active{
+    background-color: rgba(84, 195, 247, 0.6);
+    color: white;
+  }
+  .notification.active:hover{
+    background-color: rgba(84, 195, 247, 0.9);
+  }
+}

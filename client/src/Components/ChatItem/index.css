@@ -4,10 +4,17 @@
   display: flex;
   flex-shrink: 0;
   border-bottom: 1px solid var(--lightGrey);
+  border-radius: 10px;
+  margin: 2% 0;
 }
 
+.resultListItem.active {
+  background-color: var(--bs-primary-light);
+  color: white;
+}
 .resultListItem:hover {
   background-color: #F2F2F2;
+  color: var(--bs-primary-light)
 }
 
 .resultsDetailsContainer {

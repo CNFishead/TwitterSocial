@@ -4,6 +4,7 @@ const Chat = require("../../models/Chat");
 const asyncHandler = require("../../middleware/asyncHandler");
 const errorHandler = require("../../middleware/errorHandler");
 const { default: mongoose } = require("mongoose");
+const Notification = require("../../models/Notification");
 
 /**
  * @description        - Creates a new { Message } object in the database related to the { Chat } object
@@ -52,6 +53,17 @@ module.exports = asyncHandler(async (req, res, next) => {
     await chat.updateOne({
       latestMessage: message._id,
     });
+    for (const u of chat.users) {
+      if (u.toString() !== message.sender._id.toString()) {
+        // send a notification to the user
+        await Notification.insertNotification(
+          u._id,
+          message.sender._id,
+          "newMessage",
+          message.chat._id
+        );
+      }
+    }
 
     // return the newly created { Message } object to the client
     res.status(201).json(message);

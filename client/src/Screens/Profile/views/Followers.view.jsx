@@ -22,6 +22,9 @@ const Followers = () => {
   const {
     selectedUser: { user: selectedUser },
   } = useSelector((state) => state.user);
+  const {
+    socketConnection: { socket },
+  } = useSelector((state) => state.socket);
 
   // useEffect
   useEffect(() => {
@@ -45,29 +48,16 @@ const Followers = () => {
           <Container className="profileHeaderContainer" fluid>
             <div className="coverPhotoSection">
               <div className="coverPhotoContainer">
-                {profile.coverPhoto && (
-                  <Image
-                    src={profile.coverPhoto}
-                    alt="user-profile-image"
-                    fluid
-                  />
-                )}
+                {profile.coverPhoto && <Image src={profile.coverPhoto} alt="user-profile-image" fluid />}
               </div>
               <div className="userImageContainer">
-                <Image
-                  src={profile.profileImageUrl}
-                  alt="user-profile-image"
-                  fluid
-                />
+                <Image src={profile.profileImageUrl} alt="user-profile-image" fluid />
               </div>
             </div>
             <div className="profileButtonsContainer">
               {profile._id !== user._id && (
                 <>
-                  <Link
-                    to={`/messages/${profile._id}`}
-                    className="profileButton"
-                  >
+                  <Link to={`/messages/${profile._id}`} className="profileButton">
                     <BsEnvelope />
                   </Link>
 
@@ -82,16 +72,10 @@ const Followers = () => {
             </div>
             <Container fluid className="tabsContainer">
               <Nav variant="tabs" defaultActiveKey={view}>
-                <Nav.Item
-                  onClick={() => setView("following")}
-                  className={`tab ${view === "following" && "active"}`}
-                >
+                <Nav.Item onClick={() => setView("following")} className={`tab ${view === "following" && "active"}`}>
                   Following {profile.following.length}
                 </Nav.Item>
-                <Nav.Item
-                  onClick={() => setView("followers")}
-                  className={`tab ${view === "followers" && "active"}`}
-                >
+                <Nav.Item onClick={() => setView("followers")} className={`tab ${view === "followers" && "active"}`}>
                   Followers {profile.followers.length}
                 </Nav.Item>
               </Nav>
@@ -100,23 +84,14 @@ const Followers = () => {
               {view === "following" && (
                 <Container fluid className="followingContainer">
                   {profile.following.map((user) => (
-                    <UserItem
-                      key={user._id}
-                      user={user}
-                      showFollowButton={false}
-                    />
+                    <UserItem key={user._id} user={user} showFollowButton={false} socket={socket} />
                   ))}
                 </Container>
               )}
               {view === "followers" && (
                 <Container fluid className="followersContainer">
                   {profile.followers.map((u) => (
-                    <UserItem
-                      key={u._id}
-                      user={u}
-                      loggedInUser={user}
-                      showFollowButton={true}
-                    />
+                    <UserItem key={u._id} user={u} loggedInUser={user} showFollowButton={true} />
                   ))}
                 </Container>
               )}

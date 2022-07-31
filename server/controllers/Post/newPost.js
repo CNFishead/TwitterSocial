@@ -29,6 +29,7 @@ module.exports = asyncHandler(async (req, res, next) => {
       user: user._id,
       avatar: user.profileImageUrl,
       name: user.fullName,
+      postedBy: user._id,
     });
     if (newPost) {
       return res.status(201).json({

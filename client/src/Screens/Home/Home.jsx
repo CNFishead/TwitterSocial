@@ -23,6 +23,9 @@ const Home = () => {
     updatePost: { success: successUpdate },
     selectedPost: { post },
   } = useSelector((state) => state.post);
+  const {
+    socketConnection: { socket },
+  } = useSelector((state) => state.socket);
 
   // submit handler for creating new post
   const submitHandlerPost = (e, text) => {
@@ -39,13 +42,7 @@ const Home = () => {
   }, [user, dispatch, successCreate, successUpdate, navigate]);
   return (
     <>
-      <ReplyModal
-        show={show}
-        handleClose={() => setShow(false)}
-        post={post}
-        user={user}
-        setShow={setShow}
-      />
+      <ReplyModal show={show} handleClose={() => setShow(false)} post={post} user={user} setShow={setShow} socket={socket}/>
       <Meta title={`Tweetr | Home`} />
       <Container fluid>
         {loading ? (
@@ -67,6 +64,7 @@ const Home = () => {
                     setShow={setShow}
                     show={show}
                     userId={user._id}
+                    socket={socket}
                   />
                 ))}
             </div>

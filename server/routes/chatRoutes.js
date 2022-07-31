@@ -3,6 +3,7 @@ const createChat = require("../controllers/chats/createChat");
 const deleteSingleChat = require("../controllers/chats/deleteSingleChat");
 const getChats = require("../controllers/chats/getChats");
 const getSingleChat = require("../controllers/chats/getSingleChat");
+const updateRead = require("../controllers/chats/updateRead");
 const updateSingleChat = require("../controllers/chats/updateSingleChat");
 const { protect } = require("../middleware/auth");
 /* import other routes */
@@ -22,10 +23,7 @@ router.use("/:chatId/message", messageRoutes);
 router.use(protect);
 
 router.route("/").get(getChats).post(createChat);
-router
-  .route("/:id")
-  .get(getSingleChat)
-  .put(updateSingleChat)
-  .delete(deleteSingleChat);
+router.route("/:id").get(getSingleChat).put(updateSingleChat).delete(deleteSingleChat);
+router.route("/:id/markAsRead").put(updateRead);
 
 module.exports = router;

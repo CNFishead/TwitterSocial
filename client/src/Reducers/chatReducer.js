@@ -89,10 +89,15 @@ export const getChatReducer = (state = {}, action) => {
         error: action.payload,
       };
     case SEND_MESSAGE_SUCCESS:
-      return {
-        ...state,
-        messages: [...state.messages, action.payload],
-      };
+      if (
+        !state.messages.some((message) => message._id === action.payload._id)
+      ) {
+        return {
+          ...state,
+          messages: [...state.messages, action.payload],
+        };
+      }
+      return state;
 
     default:
       return state;

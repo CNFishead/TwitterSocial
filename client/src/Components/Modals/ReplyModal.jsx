@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { createComment } from "../../Actions/Post/createComment";
+import { emitNotification } from "../../utils/emitNotification";
 import PostForm from "../Post/PostForm";
 import PostItem from "../Post/PostItem";
 
@@ -17,18 +18,14 @@ import PostItem from "../Post/PostItem";
  * @returns {JSX} - JSX representation of component
  *
  */
-const ReplyModal = ({
-  show,
-  handleClose,
-  post,
-  user,
-  setShow,
-}) => {
+const ReplyModal = ({ show, handleClose, post, user, setShow, socket = null }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e, reply) => {
     e.preventDefault();
     dispatch(createComment(post._id, reply));
+    if (!socket) return;
+    emitNotification(post.user._id, user, socket);
     setShow(!show);
   };
 
@@ -42,12 +39,7 @@ const ReplyModal = ({
           <Modal.Body>
             <PostItem post={post} />
             <PostForm user={user} submitHandler={handleSubmit} isReply={true}>
-              <Button
-                className="button"
-                variant="secondary"
-                onClick={handleClose}
-                style={{ display: "inline" }}
-              >
+              <Button className="button" variant="secondary" onClick={handleClose} style={{ display: "inline" }}>
                 Close
               </Button>
             </PostForm>

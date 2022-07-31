@@ -59,6 +59,7 @@
   font-size: 24px;
 }
 
+
 .chatPageContainer .chatImagesContainer {
   display: flex;
   flex-direction: row-reverse;
@@ -86,8 +87,22 @@
 #tooltip-overflow-user-container{
   display: flex;
   flex-direction: column;
-  
 }
+.typingDots {
+  padding: 0 2%;
+}
+.typingDots span{
+  color: var(--bs-primary);
+  font-size: 10px;
+}
+.typingDots img{
+  /* background-color: #f1f0f0; */
+  padding: 6px 12px;
+  border-radius: 18px;
+  font-size: 14px;
+  height: 25px;
+}
+
 @media (prefers-color-scheme: dark) {
   #chatName{
     color: var(--bs-white);

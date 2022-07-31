@@ -1,0 +1,15 @@
+.alertWrapper {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  height: 50px;
+  box-shadow: rgba(100, 100, 111, 0.457) 0px 7px 29px 0px;
+  z-index: 100000;
+}
+.alert{
+  border-radius: 15px;
+  width: 350px;
+}
+.alert span{
+  font-size: .9rem;
+}

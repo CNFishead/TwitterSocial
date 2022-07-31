@@ -7,6 +7,7 @@
   width: 100%;
 }
 .icon{
+  
   color: var(--bs-white);
   font-size: 1.25rem;
 }
@@ -22,10 +23,34 @@
   border-radius: 50%;
 }
 
+.icon-container {
+  position: relative;
+}
 .icon-container:hover{
   background-color: rgb(51, 105, 255);
   opacity: 0.8;
   border-radius: 50%;
+}
+
+#notificationBadge,
+#messagesBadge{
+  background-color: var(--bs-red);
+  color: white;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+#notificationBadge.active,
+#messagesBadge.active{
+  visibility: visible;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -19,10 +19,21 @@
 }
 .mine{
   flex-direction: row-reverse;
+  color: white;
 }
 
 .message.mine .messageBody{
   background-color: var(--bs-primary-light);
+}
+.theirs{
+  color: var(--bs-primary-light);
+}
+
+.theirs .messageBody:hover{
+  transition: .5s;
+  cursor: pointer;
+  background-color: var(--bs-primary-light);
+  color: white;
 }
 
 .senderName{
@@ -95,7 +106,4 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .messageBody{
-    color: var(--bs-dark)
-  }
 }

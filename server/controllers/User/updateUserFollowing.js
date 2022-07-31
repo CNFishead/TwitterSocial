@@ -1,5 +1,6 @@
 const asyncHandler = require("../../middleware/asyncHandler");
 const errorHandler = require("../../middleware/errorHandler");
+const Notification = require("../../models/Notification");
 const User = require("../../models/User");
 const userObject = require("../../utils/userObject");
 
@@ -43,6 +44,10 @@ module.exports = asyncHandler(async (req, res, next) => {
     }
     user.following.push(userToBeFollowed._id);
     userToBeFollowed.followers.push(user._id);
+    // send a notification to userToBeFollowed
+    await Notification.insertNotification(userToBeFollowed, user, "follow", user._id);
+
+    // save both users
     await user.save();
     await userToBeFollowed.save();
     res.status(200).json({

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPost } from "../../Actions/Post/getPost";
 import Loader from "../../Components/Loader/Loader";
+import ReplyModal from "../../Components/Modals/ReplyModal";
 import PostItem from "../../Components/Post/PostItem";
 
 const PostView = () => {
@@ -18,6 +19,7 @@ const PostView = () => {
   const {
     selectedPost: { post, replies, loading },
   } = useSelector((state) => state.post);
+  const {socketConnection: { socket }} = useSelector((state) => state.socket);
   const { user } = useSelector((state) => state.auth);
 
   // useEffect
@@ -32,17 +34,26 @@ const PostView = () => {
       {loading ? (
         <Loader />
       ) : (
-        <Container fluid><Row>
-          {post && (
-            <PostItem
-              post={post}
-              liked={post.likes.includes(user._id)}
-              retweeted={post.retweetUsers.includes(user._id)}
-              setShow={setShow}
-              show={show}
-            />
-          )}
-          
+        <Container fluid>
+          <ReplyModal
+            show={show}
+            handleClose={() => setShow(false)}
+            post={post}
+            user={user}
+            setShow={setShow}
+            socket={socket}
+          />
+          <Row>
+            {post && (
+              <PostItem
+                post={post}
+                liked={post.likes.includes(user._id)}
+                retweeted={post.retweetUsers.includes(user._id)}
+                setShow={setShow}
+                show={show}
+              />
+            )}
+
             {replies &&
               replies.map((comment) => {
                 return (

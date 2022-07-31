@@ -10,16 +10,13 @@ import { useDispatch } from "react-redux";
 import { likePost } from "../../Actions/Post/likePost";
 import { retweet } from "../../Actions/Post/retweetPost";
 import { GET_SELECTED_POST } from "../../Constants/postConstants";
-import {
-  BsFillChatLeftDotsFill,
-  BsFillPinFill,
-  BsFillPinAngleFill,
-} from "react-icons/bs";
+import { BsFillChatLeftDotsFill, BsFillPinFill, BsFillPinAngleFill } from "react-icons/bs";
 import { FiDelete } from "react-icons/fi";
 import { deletePost } from "../../Actions/Post/deletePost";
 import NoContent from "./NoContent";
 import axios from "axios";
 import { errorHandler } from "../../utils/errorHandler";
+import { emitNotification } from "../../utils/emitNotification";
 
 const PostItem = ({
   post,
@@ -30,14 +27,21 @@ const PostItem = ({
   showRetweet = true,
   userId,
   showButtons = true,
+  socket = null,
 }) => {
   const dispatch = useDispatch();
   const likeHandler = () => {
     dispatch(likePost(post._id));
+    // we dont want to emit a notification if the user has already liked the post, as this means they have already seen the notification
+    if (!socket || liked) return;
+    emitNotification(post.user._id, userId, socket);
   };
 
   const retweetHandler = () => {
     dispatch(retweet(post._id));
+    // we dont want to emit a notification if the user has already retweeted the post, as this means they have already seen the notification
+    if (!socket || retweeted) return;
+    emitNotification(post.user._id, userId, socket);
   };
   const deleteHandler = () => {
     dispatch(deletePost(post._id));
@@ -70,14 +74,8 @@ const PostItem = ({
       <div className={`post `}>
         {post && post.user._id === userId && (
           <Container className="userOptionsContainer" fluid>
-            <BsFillPinFill
-              className={`pinButton ${post.pinned && "active"}`}
-              onClick={() => pinHandler(post._id)}
-            />
-            <FiDelete
-              className={"postDeleteButton"}
-              onClick={() => deleteHandler(post._id)}
-            />
+            <BsFillPinFill className={`pinButton ${post.pinned && "active"}`} onClick={() => pinHandler(post._id)} />
+            <FiDelete className={"postDeleteButton"} onClick={() => deleteHandler(post._id)} />
           </Container>
         )}
         {post && post.user && (
@@ -88,19 +86,13 @@ const PostItem = ({
                   <span style={{ fontSize: "1.2em" }}>
                     <FaRetweet />
                   </span>{" "}
-                  Retweeted by{" "}
-                  <Link to={`/dashboard/profile/${retweetedBy}`}>
-                    @{retweetedBy}
-                  </Link>
+                  Retweeted by <Link to={`/dashboard/profile/${retweetedBy}`}>@{retweetedBy}</Link>
                 </span>
               )}
             </div>
             <div className="mainContentContainer">
               <div className="userImageContainer">
-                <Image
-                  src={post.user ? post.user.profileImageUrl : post.avatar}
-                  className="userImage"
-                />
+                <Image src={post.user ? post.user.profileImageUrl : post.avatar} className="userImage" />
               </div>
               <Container fluid className="postContentContainer">
                 {post.pinned && (
@@ -114,10 +106,7 @@ const PostItem = ({
                 <Container fluid className="header">
                   <Row>
                     <Col>
-                      <Link
-                        to={`/dashboard/profile/${post.user.username}`}
-                        className="displayName"
-                      >
+                      <Link to={`/dashboard/profile/${post.user.username}`} className="displayName">
                         {post.user.fullName}
                       </Link>
                     </Col>
@@ -125,9 +114,7 @@ const PostItem = ({
                       <span className="username">@{post.user.username}</span>
                     </Col>
                     <Col>
-                      <span className="date">
-                        {timeDifference(new Date(), new Date(post.createdAt))}
-                      </span>
+                      <span className="date">{timeDifference(new Date(), new Date(post.createdAt))}</span>
                     </Col>
                   </Row>
                 </Container>
@@ -141,14 +128,7 @@ const PostItem = ({
                   <span>{post.content}</span>
                   {post.replyTo && showRetweet && post.replyTo.user && (
                     <Container>
-                      <PostItem
-                        post={post.replyTo}
-                        liked={liked}
-                        retweeted={retweeted}
-                        setShow={setShow}
-                        show={show}
-                        showButtons={false}
-                      />
+                      <PostItem post={post.replyTo} liked={liked} retweeted={retweeted} setShow={setShow} show={show} showButtons={false} />
                     </Container>
                   )}
                   {post.replyTo === null && (
@@ -178,26 +158,15 @@ const PostItem = ({
 
                       {isRetweet && retweetedBy !== post.user._id && (
                         <Col>
-                          <button
-                            id="retweet"
-                            onClick={retweetHandler}
-                            className={`green ${retweeted ? `active` : ""}`}
-                          >
+                          <button id="retweet" onClick={retweetHandler} className={`green ${retweeted ? `active` : ""}`}>
                             <FaRetweet /> {post.retweetUsers.length}
                           </button>{" "}
                         </Col>
                       )}
 
                       <Col>
-                        <button
-                          id="like"
-                          onClick={likeHandler}
-                          className={`red ${liked ? `active` : ""}`}
-                        >
-                          <FaHeart />{" "}
-                          <span style={{ fontSize: ".8rem" }}>
-                            {post.likes.length}
-                          </span>
+                        <button id="like" onClick={likeHandler} className={`red ${liked ? `active` : ""}`}>
+                          <FaHeart /> <span style={{ fontSize: ".8rem" }}>{post.likes.length}</span>
                         </button>
                       </Col>
                     </Row>
@@ -208,9 +177,7 @@ const PostItem = ({
           </>
         )}
       </div>
-      {post.user._id === userId && post.pinned && (
-        <hr className="pinned-post" />
-      )}
+      {post.user._id === userId && post.pinned && <hr className="pinned-post" />}
     </>
   );
 };

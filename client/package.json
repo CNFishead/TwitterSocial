@@ -10,6 +10,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0-beta1",
     "cropperjs": "^1.5.12",
+    "html-react-parser": "^3.0.1",
     "moment": "^2.29.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -22,6 +23,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
+    "socket.io-client": "^4.5.1",
     "twitter-clone": "file:..",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"

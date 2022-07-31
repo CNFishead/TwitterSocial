@@ -9,11 +9,19 @@ const Chat = require("../../models/Chat");
  */
 module.exports = asyncHandler(async (req, res, next) => {
   try {
+    const filter = {
+      users: { $elemMatch: { $eq: req.user._id } },
+      // filter out the chats that have no messages i.e., someone opened a chat but never sent a message
+      // therefore the latestMessage is null
+      latestMessage: { $ne: null },
+      // if the req.query.unreadOnly paramter is true, then only return unread chats
+      ...(req.query.unreadOnly === "true" ? { "latestMessage.readBy": { $nin: [req.user._id] } } : {}),
+    };
     const chats = await Chat.aggregate([
       {
         $match: {
           // match all chats that the user is part of the users arraay
-          users: { $in: [req.user._id] },
+          ...filter,
         },
       },
       {
@@ -36,6 +44,7 @@ module.exports = asyncHandler(async (req, res, next) => {
         },
       },
     ]);
+
     for (const c of chats) {
       await Chat.populate(c, {
         path: "latestMessage",
@@ -52,6 +61,7 @@ module.exports = asyncHandler(async (req, res, next) => {
       chats,
     });
   } catch (error) {
+    console.log(error);
     errorHandler(error, req, res, next);
   }
 });

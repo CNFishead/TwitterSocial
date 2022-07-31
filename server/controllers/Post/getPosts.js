@@ -8,8 +8,6 @@ const asyncHandler = require("../../middleware/asyncHandler");
 module.exports = asyncHandler(async (req, res, next) => {
   try {
     const { followingOnly } = req.query;
-
-    console.log(followingOnly);
     // query the database for posts and sort them by date
     const posts = await Post.aggregate([
       followingOnly && {

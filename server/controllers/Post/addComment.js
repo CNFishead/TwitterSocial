@@ -1,5 +1,6 @@
 const asyncHandler = require("../../middleware/asyncHandler");
 const errorHandler = require("../../middleware/errorHandler");
+const Notification = require("../../models/Notification");
 const Post = require("../../models/Post");
 
 /**
@@ -42,6 +43,13 @@ module.exports = asyncHandler(async (req, res, next) => {
       name: req.user.fullName,
       replyTo: post._id,
     });
+    // notify the user that they have liked a post
+    await Notification.insertNotification(
+      post.user._id,
+      req.user._id,
+      "reply",
+      newPost._id
+    );
 
     res.status(200).json({
       success: true,

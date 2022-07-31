@@ -1,24 +1,12 @@
 import { combineReducers } from "redux";
 import { alert } from "./alertReducer";
 import { authReducer } from "./authReducer";
-import {
-  createChatReducer,
-  getChatReducer,
-  getChatsReducer,
-} from "./chatReducer";
+import { createChatReducer, getChatReducer, getChatsReducer } from "./chatReducer";
 import { listMessagesReducer, sendMessageReducer } from "./messageReducer";
-import {
-  createPostReducer,
-  deletePostReducer,
-  listPostsReducer,
-  postDetailsReducer,
-  updatePostReducer,
-} from "./postReducer";
-import {
-  listUsersReducer,
-  selectedUserReducer,
-  updateUserReducer,
-} from "./userReducer";
+import { notificationReducers } from "./notificationReducer";
+import { createPostReducer, deletePostReducer, listPostsReducer, postDetailsReducer, updatePostReducer } from "./postReducer";
+import { socketConnectReducer } from "./socketReducer";
+import { listUsersReducer, selectedUserReducer, updateUserReducer } from "./userReducer";
 
 const postReducers = combineReducers({
   createPost: createPostReducer,
@@ -43,7 +31,15 @@ const chatReducers = combineReducers({
   listMessages: listMessagesReducer,
 });
 
+const socketReducers = combineReducers({
+  socketConnection: socketConnectReducer,
+});
+
 export const rootReducer = combineReducers({
+  // notifications
+  notifications: notificationReducers,
+  // socket
+  socket: socketReducers,
   // Alert reducer
   alert: alert,
   // Auth Reducers

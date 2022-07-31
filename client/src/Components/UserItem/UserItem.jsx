@@ -12,7 +12,7 @@ import styles from "./UserItem.module.css";
  * @param {Boolean} showFollowButton - whether or not to show the follow button
  * @returns {JSX} - UserItem component
  */
-const UserItem = ({ user, loggedInUser, showFollowButton = true }) => {
+const UserItem = ({ user, loggedInUser, showFollowButton = true, socket = null }) => {
   return (
     <Container className={styles.container}>
       <div className={styles.userImageContainer}>
@@ -21,18 +21,14 @@ const UserItem = ({ user, loggedInUser, showFollowButton = true }) => {
       <div className={styles.userDetailsContainer}>
         <div className={styles.header}>
           <span className="username">
-            <Link to={`/dashboard/profile/${user.username}`}>
-              @{user.username}
-            </Link>
+            <Link to={`/dashboard/profile/${user.username}`}>@{user.username}</Link>
           </span>
           <div className={styles.name}>
             {user.firstName} {user.lastName}
           </div>
         </div>
       </div>
-      {showFollowButton && user._id !== loggedInUser._id && (
-        <FollowButton user={loggedInUser} userToFollow={user} />
-      )}
+      {showFollowButton && user._id !== loggedInUser._id && <FollowButton user={loggedInUser} userToFollow={user} socket={socket} />}
     </Container>
   );
 };

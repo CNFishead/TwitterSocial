@@ -33,7 +33,7 @@ module.exports = asyncHandler(async (req, res) => {
         .status(401)
         .json({ message: "No Account Found with those Credentials" });
     }
-    console.log(user);
+    // console.log(user);
 
     if (user && (await user.matchPassword(password.trim()))) {
       res.json({ user: await userObject(user._id) });

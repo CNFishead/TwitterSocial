@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const asyncHandler = require("../../middleware/asyncHandler");
 const errorHandler = require("../../middleware/errorHandler");
 const User = require("../../models/User");
@@ -11,7 +12,14 @@ const User = require("../../models/User");
  */
 module.exports = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.params.username });
+    const filter = [
+      { username: req.params.username },
+      // check if username is of type ObjectId if it is try to find the user by the id
+      { ...(mongoose.Types.ObjectId.isValid(req.params.username) && { _id: new mongoose.Types.ObjectId(req.params.username) }) },
+    ];
+    const user = await User.findOne({
+      $or: filter,
+    });
     if (!user) {
       return res.status(404).json({
         success: false,

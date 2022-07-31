@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../../Actions/alert";
 import { timeDifference } from "../../utils/timeDifference";
-import { Container } from "react-bootstrap";
 
-const ChatItem = ({ chat }) => {
+const ChatItem = ({ chat, user }) => {
   const dispatch = useDispatch();
   // we need to create an array of Images to display in the chat item
   // this array will always hold atleast 1 image, but if the chat is a group chat it will also hold a second image,
@@ -20,21 +19,18 @@ const ChatItem = ({ chat }) => {
   if (chat.users.length > 1 && chat.isGroupChat) {
     images.push(chat.users[1].profileImageUrl);
   }
+  // active class
+  const activeClass = (chat.latestMessage && chat.latestMessage.readBy.includes(user._id)) || !chat.latestMessage ? "" : "active";
 
   return (
-    <Link
-      to={`/dashboard/messages/inbox/${chat._id}`}
-      className={`resultListItem`}
-    >
+    <Link to={`/dashboard/messages/inbox/${chat._id}`} className={`resultListItem ${activeClass}`}>
       <div className="resultImageContainer">
         {images &&
           images.map((image, indx) => (
             <div
               key={image + indx}
               // if its a group chat we need to add the class "groupChat" to the image container
-              className={`imageContainer ${
-                chat.isGroupChat && `groupChatImage`
-              } ${chat.isGroupChat && indx === 0 && `firstImage`}`}
+              className={`imageContainer ${chat.isGroupChat && `groupChatImage`} ${chat.isGroupChat && indx === 0 && `firstImage`}`}
             >
               <img src={image} alt="profile-chat-pic" />
             </div>
@@ -46,23 +42,15 @@ const ChatItem = ({ chat }) => {
           {chat.chatName
             ? chat.chatName
             : `${chat.users[0].firstName}, ${chat.users[1].firstName} ${
-                chat.users.length > 2
-                  ? `+ ${chat.users.length - 2} other users`
-                  : ""
+                chat.users.length > 2 ? `+ ${chat.users.length - 2} other users` : ""
               }`}
         </span>
         {chat.latestMessage ? (
           <span className="subTextContainer">
             <span className={`subText ellipsis`}>
-              {chat.latestMessage.sender.firstName}:{" "}
-              {chat.latestMessage.content}
+              {chat.latestMessage.sender.firstName}: {chat.latestMessage.content}
             </span>
-            <span className="subText timeStamp">
-              {timeDifference(
-                new Date(),
-                new Date(chat.latestMessage.createdAt)
-              )}
-            </span>
+            <span className="subText timeStamp">{timeDifference(new Date(), new Date(chat.latestMessage.createdAt))}</span>
           </span>
         ) : (
           <span className={`subText ellipsis`}>No messages</span>

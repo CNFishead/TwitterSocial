@@ -2,6 +2,7 @@ const asyncHandler = require("../../middleware/asyncHandler");
 const Post = require("../../models/Post");
 const User = require("../../models/User");
 const errorHandler = require("../../middleware/errorHandler");
+const Notification = require("../../models/Notification");
 
 /**
  *  @param {string} postId
@@ -21,7 +22,6 @@ exports.retweet = asyncHandler(async (req, res, next) => {
       postedBy: userId,
       retweetData: postId,
     });
-    console.log(deletedPost);
     // find the original post
     const post = await Post.findById(postId).populate("user");
     if (!deletedPost) {
@@ -39,6 +39,12 @@ exports.retweet = asyncHandler(async (req, res, next) => {
         $push: { retweets: newPost._id },
       });
       // lastly, update the number of users who retweeted the post
+      await Notification.insertNotification(
+        post.user._id,
+        req.user._id,
+        "retweet",
+        newPost._id,
+      );
       post.retweetUsers.push(userId);
       await post.save();
       res.status(200).json({
