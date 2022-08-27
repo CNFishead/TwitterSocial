@@ -27,7 +27,7 @@ const NewMessage = () => {
   } = useSelector((state) => state.user);
   const {
     createChat: { loading: loadingCreateChat, success, chat },
-  } = useSelector((state) => state.message);
+  } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.auth);
 
   // function to handle the amount of users to chat with

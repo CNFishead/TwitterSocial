@@ -19,8 +19,6 @@ const Notification = require("../../models/Notification");
  */
 module.exports = asyncHandler(async (req, res, next) => {
   try {
-    console.log(req.baseUrl.split("/")[3]);
-    console.log(mongoose.Types.ObjectId(req.baseUrl.split("/")[3]));
     // Get the { Chat } object
     const chat = await Chat.findById(
       mongoose.Types.ObjectId(req.baseUrl.split("/")[3])

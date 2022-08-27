@@ -9,7 +9,7 @@ export const createConnection = () => async (dispatch, getState) => {
     const {
       socketConnection: { socket, isConnecting },
     } = getState().socket;
-    if (socket || isConnecting) return;
+    if (socket || isConnecting || !user) return;
     dispatch({ type: SOCKET_CONNECT });
     const connection = io("/");
     await connection.on("connect", () => {

@@ -12,7 +12,6 @@ const Post = require("../../models/Post");
  */
 module.exports = asyncHandler(async (req, res, next) => {
   try {
-    console.log(req.body);
     // destructure the req.body
     const { text } = req.body;
     // check the text isnt empty
